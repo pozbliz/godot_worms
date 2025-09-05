@@ -1,0 +1,142 @@
+[gd_scene load_steps=17 format=3 uid="uid://coisauji2t45e"]
+
+[ext_resource type="Script" uid="uid://bnk4241nx844v" path="res://entities/worms/character.gd" id="1_c0aes"]
+[ext_resource type="Texture2D" uid="uid://u06bkossxib8" path="res://icon.svg" id="2_2frme"]
+[ext_resource type="Shader" uid="uid://du7ub0j8jld23" path="res://entities/worms/hit_flash.gdshader" id="2_dwp3s"]
+[ext_resource type="Script" uid="uid://cqptrhwh4f6m" path="res://entities/worms/states/state_machine.gd" id="4_l3dd6"]
+[ext_resource type="Script" uid="uid://be13kwcie2neq" path="res://entities/worms/states/idle_state.gd" id="5_j84ex"]
+[ext_resource type="Script" uid="uid://sqep1uv0i46i" path="res://entities/worms/states/jump_state.gd" id="6_lqksk"]
+[ext_resource type="Script" uid="uid://bj176aj65ia7n" path="res://entities/worms/states/walk_state.gd" id="7_ng2mp"]
+[ext_resource type="Script" uid="uid://5hl10unofp0t" path="res://entities/worms/states/fall_state.gd" id="8_a7elo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ddo6i"]
+shader = ExtResource("2_dwp3s")
+shader_parameter/flash = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3dd6"]
+
+[sub_resource type="Animation" id="Animation_l3dd6"]
+resource_name = "idle"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_j84ex"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_lqksk"]
+resource_name = "walk"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ng2mp"]
+resource_name = "jump"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_a7elo"]
+resource_name = "fall"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j84ex"]
+_data = {
+&"RESET": SubResource("Animation_j84ex"),
+&"fall": SubResource("Animation_a7elo"),
+&"idle": SubResource("Animation_l3dd6"),
+&"jump": SubResource("Animation_ng2mp"),
+&"walk": SubResource("Animation_lqksk")
+}
+
+[node name="Character" type="CharacterBody2D"]
+position = Vector2(159, 91)
+collision_mask = 2
+script = ExtResource("1_c0aes")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ddo6i")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_2frme")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_l3dd6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_j84ex")
+}
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_l3dd6")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_j84ex")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("6_lqksk")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("7_ng2mp")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("8_a7elo")
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmrei35c8kvww"]
+
+[ext_resource type="PackedScene" uid="uid://coisauji2t45e" path="res://entities/worms/character.tscn" id="1_53q0u"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_53q0u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjrb6"]
+size = Vector2(367.5, 55)
+
+[node name="Main" type="Node"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="TextureRect" type="TextureRect" parent="World/StaticBody2D"]
+offset_left = 5.0
+offset_top = 144.0
+offset_right = 375.0
+offset_bottom = 200.0
+texture = SubResource("PlaceholderTexture2D_53q0u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/StaticBody2D"]
+position = Vector2(190.25, 172.5)
+shape = SubResource("RectangleShape2D_pjrb6")
+
+[node name="Character" parent="." instance=ExtResource("1_53q0u")]
