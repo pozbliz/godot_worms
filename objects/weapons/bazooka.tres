@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://cfld21d5umxsh"]
+
+[ext_resource type="PackedScene" uid="uid://du225tgenw72m" path="res://objects/projectiles/rocket.tscn" id="1_8akpy"]
+[ext_resource type="Script" uid="uid://5mrlmabn8unf" path="res://objects/weapons/weapon_data.gd" id="1_fuatv"]
+
+[resource]
+script = ExtResource("1_fuatv")
+name = ""
+projectile_scene = ExtResource("1_8akpy")
+cooldown = 999.99
+number_of_shots = 1
+metadata/_custom_type_script = "uid://5mrlmabn8unf"

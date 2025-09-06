@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dss6rdxr1i315"]
+
+[ext_resource type="Script" uid="uid://ju5orksamtld" path="res://objects/weapons/weapon.gd" id="1_vd0dp"]
+[ext_resource type="Resource" uid="uid://cfld21d5umxsh" path="res://objects/weapons/bazooka.tres" id="2_0n3tq"]
+[ext_resource type="Texture2D" uid="uid://f63wmekn0duv" path="res://assets/weapons/bazooka.png" id="2_u8e8d"]
+
+[node name="Bazooka" type="Node2D"]
+script = ExtResource("1_vd0dp")
+weapon_data = ExtResource("2_0n3tq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_u8e8d")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(8, 0)
