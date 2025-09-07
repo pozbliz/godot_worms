@@ -52,9 +52,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if get_tree().paused:
 		return
 		
-	if Input.is_action_just_pressed("aim") and current_weapon:
-		aim()
-		
 func _physics_process(delta: float) -> void:
 	if not is_dead and global_position.y > viewport_size.y:
 		die()
@@ -67,10 +64,8 @@ func _physics_process(delta: float) -> void:
 	
 func play_animation(action: String) -> Signal:
 	sprite.play(action)
-		
-	return sprite.animation_finished
 	
-	pass
+	return sprite.animation_finished
 	
 func take_damage() -> void:
 	if is_invincible:

@@ -5,6 +5,10 @@ extends State
 func enter():
 	character.velocity.x = 0.0
 	character.play_animation("idle")
+	
+func handle_input(event) -> void:
+	if Input.is_action_just_pressed("aim") and character.current_weapon:
+		character.aim()
 
 func physics_update(_delta: float) -> void:
 	character.velocity.y += character.gravity * _delta

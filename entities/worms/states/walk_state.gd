@@ -7,6 +7,10 @@ extends State
 
 func enter():
 	character.play_animation("walk")
+	
+func handle_input(event) -> void:
+	if Input.is_action_just_pressed("aim") and character.current_weapon:
+		character.aim()
 
 func physics_update(delta: float) -> void:
 	character.input_direction_x = Input.get_axis("move_left", "move_right")
