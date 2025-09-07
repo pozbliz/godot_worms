@@ -20,3 +20,4 @@ signal timer_updated(time_left)
 
 # Gameplay Signals
 signal level_started
+signal weapon_fired(weapon_name)

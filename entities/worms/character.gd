@@ -31,10 +31,13 @@ var current_weapon_index: int = 0
 	"walk": $StateMachine/Walk,
 	"jump": $StateMachine/Jump,
 	"fall": $StateMachine/Fall,
+	"aim": $StateMachine/Aim,
 }
 @onready var viewport_size: Vector2 = get_viewport_rect().size
 @onready var weapon_position: Marker2D = $WeaponPosition
 @onready var weapon_position_x_default: float = weapon_position.position.x
+@onready var crosshair: Sprite2D = $Crosshair
+
 
 func _ready() -> void:
 	state_machine.change_state(states.idle)
@@ -42,12 +45,14 @@ func _ready() -> void:
 	
 	equip_weapon(0)
 	
+	crosshair.hide()
+	
 func _unhandled_input(_event: InputEvent) -> void:
 	if get_tree().paused:
 		return
 		
-	if Input.is_action_just_pressed("shoot") and current_weapon:
-		current_weapon.shoot()
+	if Input.is_action_just_pressed("aim") and current_weapon:
+		aim()
 		
 func _physics_process(delta: float) -> void:
 	if not is_dead and global_position.y > viewport_size.y:
@@ -58,6 +63,8 @@ func _physics_process(delta: float) -> void:
 		dir = -1.0
 	weapon_position.position.x = weapon_position_x_default * dir
 	current_weapon.sprite_2d.flip_h = facing_direction_x < 0.0
+	
+	print("character pos: ", global_transform)
 		
 func play_animation(action: String) -> Signal:
 	sprite.play(action)
@@ -96,6 +103,9 @@ func equip_weapon(index: int):
 	weapon_position.add_child(current_weapon)
 	current_weapon.position = Vector2.ZERO
 	current_weapon_index = index
+	
+func aim():
+	state_machine.change_state(states.aim)
 	
 func die() -> void:
 	if is_dead:

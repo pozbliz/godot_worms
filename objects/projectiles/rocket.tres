@@ -1,12 +1,9 @@
-[gd_resource type="Resource" script_class="ProjectileData" load_steps=3 format=3 uid="uid://cgri3nbenanc5"]
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=2 format=3 uid="uid://cgri3nbenanc5"]
 
 [ext_resource type="Script" uid="uid://b6xfsltlvwn6k" path="res://objects/projectiles/projectile_data.gd" id="1_ctm60"]
-[ext_resource type="Texture2D" uid="uid://2xu8nerfl3u6" path="res://assets/projectiles/rocket.png" id="2_egn3l"]
 
 [resource]
 script = ExtResource("1_ctm60")
 speed = 50.0
 damage = 30
-damage_radius = 30
-sprite_texture = ExtResource("2_egn3l")
 metadata/_custom_type_script = "uid://b6xfsltlvwn6k"

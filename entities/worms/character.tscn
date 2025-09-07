@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://coisauji2t45e"]
+[gd_scene load_steps=27 format=3 uid="uid://coisauji2t45e"]
 
 [ext_resource type="Script" uid="uid://bnk4241nx844v" path="res://entities/worms/character.gd" id="1_c0aes"]
 [ext_resource type="Shader" uid="uid://du7ub0j8jld23" path="res://entities/worms/hit_flash.gdshader" id="2_dwp3s"]
@@ -7,9 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://bgid35mkrb5ix" path="res://assets/characters/worm_idle.png" id="4_lqksk"]
 [ext_resource type="Script" uid="uid://be13kwcie2neq" path="res://entities/worms/states/idle_state.gd" id="5_j84ex"]
 [ext_resource type="Texture2D" uid="uid://c4brllgilrv4" path="res://assets/characters/worm_walk.png" id="5_ng2mp"]
+[ext_resource type="Texture2D" uid="uid://nwlh57l3sbb6" path="res://assets/weapons/crosshair.png" id="6_a7elo"]
 [ext_resource type="Script" uid="uid://sqep1uv0i46i" path="res://entities/worms/states/jump_state.gd" id="6_lqksk"]
 [ext_resource type="Script" uid="uid://bj176aj65ia7n" path="res://entities/worms/states/walk_state.gd" id="7_ng2mp"]
 [ext_resource type="Script" uid="uid://5hl10unofp0t" path="res://entities/worms/states/fall_state.gd" id="8_a7elo"]
+[ext_resource type="Script" uid="uid://0capedttmv0p" path="res://entities/worms/states/aim_state.gd" id="11_ng2mp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ddo6i"]
 shader = ExtResource("2_dwp3s")
@@ -158,6 +160,9 @@ libraries = {
 [node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2(9, 0)
 
+[node name="Crosshair" type="Sprite2D" parent="."]
+texture = ExtResource("6_a7elo")
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_l3dd6")
 
@@ -172,5 +177,8 @@ script = ExtResource("7_ng2mp")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("8_a7elo")
+
+[node name="Aim" type="Node" parent="StateMachine"]
+script = ExtResource("11_ng2mp")
 
 [node name="Camera2D" type="Camera2D" parent="."]

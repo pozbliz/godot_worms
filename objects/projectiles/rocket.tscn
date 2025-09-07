@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqvvwmu156rr" path="res://objects/projectiles/projectile.gd" id="1_bhfqx"]
 [ext_resource type="PackedScene" uid="uid://dbp5w4wswvt1w" path="res://entities/components/hitbox_component.tscn" id="2_4voct"]
-[ext_resource type="Script" uid="uid://b6xfsltlvwn6k" path="res://objects/projectiles/projectile_data.gd" id="2_qw4hd"]
+[ext_resource type="Resource" uid="uid://cgri3nbenanc5" path="res://objects/projectiles/rocket.tres" id="2_qw4hd"]
 [ext_resource type="Texture2D" uid="uid://2xu8nerfl3u6" path="res://assets/projectiles/rocket.png" id="2_xgt5m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8jur"]
