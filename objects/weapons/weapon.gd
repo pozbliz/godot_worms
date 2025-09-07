@@ -1,8 +1,12 @@
-# weapon.gd
 extends Node2D
 
+
 @export var weapon_data: WeaponData
-var can_shoot := true
+
+var can_shoot: bool = true
+
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
 
 func _ready():
 	pass
@@ -11,7 +15,6 @@ func shoot():
 	if not can_shoot or not weapon_data:
 		return
 
-	# Spawn projectile
 	var projectile = weapon_data.projectile_scene.instantiate()
 	var muzzle_global = $Marker2D.global_position
 	projectile.global_position = muzzle_global

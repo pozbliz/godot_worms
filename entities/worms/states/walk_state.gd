@@ -2,6 +2,9 @@ class_name WalkState
 extends State
 
 
+@onready var default_weapon_position: Vector2
+
+
 func enter():
 	character.play_animation("walk")
 
@@ -17,6 +20,7 @@ func physics_update(delta: float) -> void:
 	if character.input_direction_x != 0:
 		character.facing_direction_x = character.input_direction_x
 	character.sprite.flip_h = character.facing_direction_x < 0
+	#character.weapon_position_node.position.x = character.default_weapon_offset.x * character.facing_direction_x
 		
 	character.move_and_slide()
 	

@@ -33,7 +33,8 @@ var current_weapon_index: int = 0
 	"fall": $StateMachine/Fall,
 }
 @onready var viewport_size: Vector2 = get_viewport_rect().size
-
+@onready var weapon_position: Marker2D = $WeaponPosition
+@onready var weapon_position_x_default: float = weapon_position.position.x
 
 func _ready() -> void:
 	state_machine.change_state(states.idle)
@@ -51,6 +52,12 @@ func _unhandled_input(_event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if not is_dead and global_position.y > viewport_size.y:
 		die()
+		
+	var dir: float = 1.0
+	if facing_direction_x < 0.0:
+		dir = -1.0
+	weapon_position.position.x = weapon_position_x_default * dir
+	current_weapon.sprite_2d.flip_h = facing_direction_x < 0.0
 		
 func play_animation(action: String) -> Signal:
 	sprite.play(action)
@@ -86,8 +93,8 @@ func equip_weapon(index: int):
 	if current_weapon:
 		current_weapon.queue_free()
 	current_weapon = weapon_scenes[index].instantiate()
-	add_child(current_weapon)
-	current_weapon.position = $WeaponPosition.position
+	weapon_position.add_child(current_weapon)
+	current_weapon.position = Vector2.ZERO
 	current_weapon_index = index
 	
 func die() -> void:
