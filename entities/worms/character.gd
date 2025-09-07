@@ -65,8 +65,6 @@ func _physics_process(delta: float) -> void:
 	weapon_position.position.x = weapon_position_x_default * dir
 	current_weapon.sprite_2d.flip_h = facing_direction_x < 0.0
 	
-	print("character pos: ", global_transform)
-		
 func play_animation(action: String) -> Signal:
 	sprite.play(action)
 		

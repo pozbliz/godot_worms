@@ -3,7 +3,8 @@ extends Node2D
 
 @export var weapon_data: WeaponData
 
-var can_shoot: bool = true
+var on_cooldown: bool = false
+var shots_taken: int = 0
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
@@ -12,7 +13,7 @@ func _ready():
 	pass
 
 func shoot(shoot_direction: Vector2):
-	if not can_shoot or not weapon_data:
+	if on_cooldown or shots_taken >= weapon_data.number_of_shots or not weapon_data:
 		return
 
 	var projectile = weapon_data.projectile_scene.instantiate()
@@ -32,9 +33,12 @@ func shoot(shoot_direction: Vector2):
 		add_child(vfx)
 
 	# Cooldown
-	can_shoot = false
-	await get_tree().create_timer(weapon_data.cooldown).timeout
-	can_shoot = true
+	shots_taken += 1
+	
+	if shots_taken < weapon_data.number_of_shots:
+		on_cooldown = true
+		await get_tree().create_timer(weapon_data.cooldown).timeout
+		on_cooldown = false
 	
 func get_muzzle_position() -> Vector2:
 	return $Muzzle.global_position
