@@ -15,6 +15,7 @@ var attack_damage: int = 1
 var coyote_timer: float = 0.0
 var input_direction_x: float
 var facing_direction_x: float = 1.0
+var forward = Vector2(facing_direction_x, 0)
 var jump_held_time: float = 0.0
 var is_jumping: bool = false
 var is_dead: bool = false
