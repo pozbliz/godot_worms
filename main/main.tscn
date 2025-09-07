@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmrei35c8kvww"]
+[gd_scene load_steps=5 format=3 uid="uid://cmrei35c8kvww"]
 
 [ext_resource type="PackedScene" uid="uid://coisauji2t45e" path="res://entities/worms/character.tscn" id="1_53q0u"]
+[ext_resource type="Script" uid="uid://cx0oxb0sgcmll" path="res://main/turn_manager.gd" id="2_pjrb6"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_53q0u"]
 
@@ -31,3 +32,6 @@ shape = SubResource("RectangleShape2D_pjrb6")
 
 [node name="Character" parent="GameRoot" instance=ExtResource("1_53q0u")]
 position = Vector2(0, 0)
+
+[node name="TurnManager" type="Node" parent="."]
+script = ExtResource("2_pjrb6")

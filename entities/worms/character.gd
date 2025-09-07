@@ -23,6 +23,7 @@ var invincibility_timer: float = 1.0
 var is_invincible: bool = false
 var current_weapon: Node = null
 var current_weapon_index: int = 0
+var team: int = 1
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var world_collider: CollisionShape2D = $CollisionShape2D
@@ -43,6 +44,7 @@ var current_weapon_index: int = 0
 func _ready() -> void:
 	state_machine.change_state(states.idle)
 	add_to_group("character")
+	TurnManager.characters.append(self)
 	
 	equip_weapon(0)
 	
