@@ -21,3 +21,5 @@ signal timer_updated(time_left)
 # Gameplay Signals
 signal level_started
 signal weapon_fired(weapon_name)
+signal all_worms_died
+signal game_finished(team)  # TODO: implement game won screen

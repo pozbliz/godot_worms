@@ -121,7 +121,3 @@ func die() -> void:
 	
 	#play_animation("death")
 	EventBus.character_died.emit(self)
-	
-func respawn():
-	is_dead = false
-	is_invincible = false
