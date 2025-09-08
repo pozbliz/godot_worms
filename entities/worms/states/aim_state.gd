@@ -25,15 +25,12 @@ func physics_update(delta: float) -> void:
 	var muzzle_pos = character.current_weapon.get_muzzle_position()
 	var raw_dir = (mouse_pos - muzzle_pos).normalized()
 	
-	var angle_between = character.forward.angle_to(raw_dir)
-	var max_angle = PI / 2
-	var aim_dir = raw_dir
-	if angle_between > max_angle:
-		aim_dir = character.forward.rotated(max_angle)
-	elif angle_between < -max_angle:
-		aim_dir = character.forward.rotated(-max_angle)
-		
+	var angle = character.forward.angle_to(raw_dir)
+	var max_angle = PI / 2.5
+	angle = clamp(angle, -max_angle, max_angle)
+	
 	# Update weapon rotation
+	var aim_dir = character.forward.rotated(angle)
 	character.current_weapon.rotation = aim_dir.angle()
 	
 	# Limit crosshair position along this vector

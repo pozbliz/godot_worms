@@ -12,6 +12,7 @@ func handle_input(event) -> void:
 
 func physics_update(_delta: float) -> void:
 	character.velocity.y += character.gravity * _delta
+	character.forward = Vector2(character.facing_direction_x, 0)
 	character.move_and_slide()
 
 	if not character.is_on_floor():
