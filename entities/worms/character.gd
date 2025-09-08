@@ -24,6 +24,7 @@ var is_invincible: bool = false
 var current_weapon: Node = null
 var current_weapon_index: int = 0
 var team: int = 1
+var turn_active: bool = false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var world_collider: CollisionShape2D = $CollisionShape2D
@@ -55,6 +56,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 		return
 		
 func _physics_process(delta: float) -> void:
+	if not turn_active:
+		return
+	
 	if not is_dead and global_position.y > viewport_size.y:
 		die()
 		
@@ -103,17 +107,20 @@ func equip_weapon(index: int):
 func aim():
 	state_machine.change_state(states.aim)
 	
+func start_turn() -> void:
+	turn_active = true
+	
+func end_turn() -> void:
+	turn_active = false
+	
 func die() -> void:
 	if is_dead:
 		return
 		
 	is_dead = true
 	
-	state_machine.set_process(false)
-	state_machine.set_physics_process(false)
-	
 	#play_animation("death")
-	EventBus.character_died.emit()
+	EventBus.character_died.emit(self)
 	
 func respawn():
 	is_dead = false

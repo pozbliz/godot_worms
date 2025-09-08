@@ -22,18 +22,6 @@ theme_override_constants/margin_right = 400
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ScoreText" type="Label" parent="MarginContainer2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_font_sizes/font_size = 25
-text = "Score: "
-
-[node name="ScoreLabel" type="Label" parent="MarginContainer2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_font_sizes/font_size = 25
-text = "0"
-
 [node name="TimerText" type="Label" parent="MarginContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
