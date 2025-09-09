@@ -15,8 +15,13 @@ var game_over: bool = false
 
 func _ready() -> void:
 	EventBus.character_died.connect(_on_character_died)
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if current_character:
+		current_character.state_machine._unhandled_input(event)
+		get_tree().root.set_input_as_handled()
 
-func assign_to_team() -> void:
+func assign_teams() -> void:
 	SettingsManager.load_settings()
 	number_of_teams = SettingsManager.number_of_teams
 	number_of_worms = SettingsManager.number_of_worms

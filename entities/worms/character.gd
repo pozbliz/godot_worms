@@ -25,6 +25,7 @@ var current_weapon: Node = null
 var current_weapon_index: int = 0
 var team: int = 1
 var turn_active: bool = false
+var worm_id: int
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var world_collider: CollisionShape2D = $CollisionShape2D
@@ -55,6 +56,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if get_tree().paused:
 		return
 		
+	if not turn_active:
+		return
+		
 func _physics_process(delta: float) -> void:
 	if not turn_active:
 		return
@@ -76,8 +80,6 @@ func play_animation(action: String) -> Signal:
 func take_damage() -> void:
 	if is_invincible:
 		return
-		
-	# TODO: add hp and other components
 		
 	is_invincible = true
 	var timer = get_tree().create_timer(invincibility_timer)
@@ -108,9 +110,11 @@ func aim():
 	state_machine.change_state(states.aim)
 	
 func start_turn() -> void:
+	print('starting turn: ', worm_id)
 	turn_active = true
 	
 func end_turn() -> void:
+	print('ending turn: ', worm_id)
 	turn_active = false
 	
 func die() -> void:

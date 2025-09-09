@@ -26,6 +26,8 @@ func _on_projectile_area_entered(area):
 		var attack = Attack.new()
 		attack.attack_damage = projectile_data.damage
 		area.damage(attack)
+		
+	# TODO: add world collision
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()

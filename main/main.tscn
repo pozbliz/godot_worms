@@ -1,17 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmrei35c8kvww"]
+[gd_scene load_steps=6 format=3 uid="uid://cmrei35c8kvww"]
 
 [ext_resource type="PackedScene" uid="uid://coisauji2t45e" path="res://entities/worms/character.tscn" id="1_53q0u"]
+[ext_resource type="Script" uid="uid://t15a37poifvu" path="res://main/main.gd" id="1_xwkvk"]
 [ext_resource type="Script" uid="uid://cx0oxb0sgcmll" path="res://main/turn_manager.gd" id="2_pjrb6"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_53q0u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjrb6"]
-size = Vector2(491.5, 55)
+size = Vector2(693.5, 55)
 
 [node name="Main" type="Node"]
 
 [node name="GameRoot" type="Node2D" parent="."]
 scale = Vector2(2, 2)
+script = ExtResource("1_xwkvk")
+character_scene = ExtResource("1_53q0u")
 
 [node name="World" type="Node2D" parent="GameRoot"]
 
@@ -22,16 +25,13 @@ collision_mask = 0
 [node name="TextureRect" type="TextureRect" parent="GameRoot/World/StaticBody2D"]
 offset_left = -117.0
 offset_top = 144.0
-offset_right = 375.0
+offset_right = 576.0
 offset_bottom = 200.0
 texture = SubResource("PlaceholderTexture2D_53q0u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameRoot/World/StaticBody2D"]
-position = Vector2(128.25, 172.5)
+position = Vector2(229.25, 172.5)
 shape = SubResource("RectangleShape2D_pjrb6")
-
-[node name="Character" parent="GameRoot" instance=ExtResource("1_53q0u")]
-position = Vector2(0, 0)
 
 [node name="TurnManager" type="Node" parent="."]
 script = ExtResource("2_pjrb6")

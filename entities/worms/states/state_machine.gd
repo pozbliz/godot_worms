@@ -11,7 +11,7 @@ func _ready():
 	change_state(initial_state)
 
 func _unhandled_input(event):
-	if current_state:
+	if current_state and current_state.character.turn_active:
 		current_state.handle_input(event)
 
 func change_state(new_state: State):
@@ -24,7 +24,7 @@ func change_state(new_state: State):
 	current_state.enter()
 
 func _physics_process(delta):
-	if current_state:
+	if current_state and current_state.character.turn_active:
 		current_state.physics_update(delta)
 		
 func get_current_state() -> State:
