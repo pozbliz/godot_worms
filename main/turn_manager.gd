@@ -33,8 +33,6 @@ func assign_teams() -> void:
 	for i in range(characters.size()):
 		var team = i % number_of_teams
 		var chosen = characters[i]
-		chosen.team = team
-		chosen.add_to_group("team" + str(team))
 		
 	turn_order = characters.duplicate()
 	
