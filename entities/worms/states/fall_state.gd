@@ -4,9 +4,14 @@ extends State
 
 func enter():
 	character.play_animation("fall")
+	
+func handle_input(_event: InputEvent) -> void:
+	if get_tree().paused:
+		return
+		
+	character.input_direction_x = Input.get_axis("move_left", "move_right")
 
 func physics_update(delta: float) -> void:
-	character.input_direction_x = Input.get_axis("move_left", "move_right")
 	character.velocity.x = character.speed * character.input_direction_x
 	character.velocity.y += character.gravity * delta
 	
@@ -21,7 +26,3 @@ func physics_update(delta: float) -> void:
 			state_machine.change_state(character.states.idle)
 		else:
 			state_machine.change_state(character.states.walk)
-			
-func bounce():
-	character.velocity.y = character.jump_velocity * 0.5
-	state_machine.change_state(character.states.jump)

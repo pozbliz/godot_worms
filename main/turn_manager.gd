@@ -1,15 +1,15 @@
 extends Node
 
 
+@export var turn_time: float = 10.0
+
 var characters: Array[Character]
 var turn_order: Array[Character]
 var number_of_teams: int = 2
 var number_of_worms: int = 2
 var current_character: Character
 
-var turn_time: float = 30.0
 var time_left: float = 0.0
-
 var game_over: bool = false
 
 

@@ -24,7 +24,7 @@ func change_state(new_state: State):
 	current_state.enter()
 
 func _physics_process(delta):
-	if current_state and current_state.character.turn_active:
+	if current_state:
 		current_state.physics_update(delta)
 		
 func get_current_state() -> State:

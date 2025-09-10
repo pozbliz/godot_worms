@@ -41,6 +41,7 @@ var worm_id: int
 @onready var weapon_position: Marker2D = $WeaponPosition
 @onready var weapon_position_x_default: float = weapon_position.position.x
 @onready var crosshair: Sprite2D = $Crosshair
+@onready var camera_2d: Camera2D = $Camera2D
 
 
 func _ready() -> void:
@@ -49,7 +50,6 @@ func _ready() -> void:
 	TurnManager.characters.append(self)
 	
 	equip_weapon(0)
-	
 	crosshair.hide()
 	
 func _unhandled_input(_event: InputEvent) -> void:
@@ -60,9 +60,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 		return
 		
 func _physics_process(delta: float) -> void:
-	if not turn_active:
-		return
-	
 	if not is_dead and global_position.y > viewport_size.y:
 		die()
 		
@@ -112,10 +109,15 @@ func aim():
 func start_turn() -> void:
 	print('starting turn: ', worm_id)
 	turn_active = true
+	camera_2d.enabled = true
+	jump_held_time = 0.0
+	coyote_timer = 0.0
 	
 func end_turn() -> void:
 	print('ending turn: ', worm_id)
 	turn_active = false
+	camera_2d.enabled = false
+	state_machine.change_state(states.idle)
 	
 func die() -> void:
 	if is_dead:
