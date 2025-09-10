@@ -27,13 +27,12 @@ func create_characters() -> void:
 	number_of_teams = SettingsManager.number_of_teams
 	number_of_worms = SettingsManager.number_of_worms
 	var total_characters: int = number_of_teams * number_of_worms
-	var spawn_pos_margin: int = 100
-	
+	var spawn_pos_margin: int = 100	
 	var team_colors = [
-		Color(1, 0.3, 0.3),  # red
-		Color(0.3, 0.3, 1),  # blue
-		Color(0.3, 1, 0.3),  # green
-		Color(1, 1, 0.3)     # yellow
+		Color.RED,
+		Color.BLUE,
+		Color.GREEN,
+		Color.YELLOW
 	]
 	
 	for i in range(total_characters):
@@ -45,7 +44,18 @@ func create_characters() -> void:
 		char.team =  i % number_of_teams
 		char.add_to_group("team" + str(char.team + 1))
 		
-		var mat = char.sprite.material.duplicate()
-		char.sprite.material = mat
+		# Tint by team color shader
+		var team_shader := preload("res://entities/worms/team_tint.gdshader")
+		var mat := ShaderMaterial.new()
+		mat.shader = team_shader
 		mat.set_shader_parameter("team_color", team_colors[char.team % team_colors.size()])
-		mat.set_shader_parameter("tint_strength", 0.3)
+		mat.set_shader_parameter("tint_strength", 0.18)
+
+		_apply_material_recursive(char, mat)
+		
+func _apply_material_recursive(node: Node, mat: ShaderMaterial) -> void:
+	if node is Sprite2D or node is AnimatedSprite2D:
+		node.material = mat
+	for child in node.get_children():
+		if child is Node:
+			_apply_material_recursive(child, mat)
