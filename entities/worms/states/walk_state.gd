@@ -16,6 +16,10 @@ func handle_input(event) -> void:
 		state_machine.change_state(character.states.jump)
 
 func physics_update(delta: float) -> void:
+	if not character.turn_active:
+		character.velocity.x = 0
+		state_machine.change_state(character.states.idle)
+		
 	if character.input_direction_x != 0:
 		character.velocity.x = lerp(
 			character.velocity.x, 

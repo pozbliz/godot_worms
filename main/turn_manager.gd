@@ -1,7 +1,7 @@
 extends Node
 
 
-@export var turn_time: float = 10.0
+@export var turn_time: float = 3.0
 
 var characters: Array[Character]
 var turn_order: Array[Character]
@@ -66,6 +66,7 @@ func _process(delta: float) -> void:
 	
 func _on_character_died(character: Character) -> void:
 	turn_order.erase(character)
+	character.queue_free()
 
 	var alive_teams := {}
 	for char in turn_order:

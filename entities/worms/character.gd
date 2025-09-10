@@ -107,17 +107,17 @@ func aim():
 	state_machine.change_state(states.aim)
 	
 func start_turn() -> void:
-	print('starting turn: ', worm_id)
 	turn_active = true
 	camera_2d.enabled = true
 	jump_held_time = 0.0
 	coyote_timer = 0.0
+	print(velocity)
 	
 func end_turn() -> void:
-	print('ending turn: ', worm_id)
+	state_machine.change_state(states.idle)
+	velocity.x = 0.0
 	turn_active = false
 	camera_2d.enabled = false
-	state_machine.change_state(states.idle)
 	
 func die() -> void:
 	if is_dead:

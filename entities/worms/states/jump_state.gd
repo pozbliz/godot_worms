@@ -19,6 +19,10 @@ func enter():
 	EventBus.jump_pressed.emit()
 	
 func physics_update(delta: float) -> void:
+	if not character.turn_active:
+		character.velocity.x = 0
+		state_machine.change_state(character.states.idle)
+		
 	character.velocity.x = character.speed * character.input_direction_x
 	character.velocity.y += character.gravity * delta
 	
