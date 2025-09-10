@@ -59,7 +59,8 @@ func end_turn() -> void:
 func _process(delta: float) -> void:
 	if current_character:
 		time_left -= delta
-		EventBus.timer_updated.emit(time_left)
+		var seconds_left := int(ceil(time_left))
+		EventBus.timer_updated.emit(seconds_left)
 		if time_left <= 0:
 			end_turn()
 	

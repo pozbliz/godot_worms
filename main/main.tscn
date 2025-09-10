@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmrei35c8kvww"]
+[gd_scene load_steps=10 format=3 uid="uid://cmrei35c8kvww"]
 
 [ext_resource type="PackedScene" uid="uid://coisauji2t45e" path="res://entities/worms/character.tscn" id="1_53q0u"]
 [ext_resource type="Script" uid="uid://t15a37poifvu" path="res://main/main.gd" id="1_xwkvk"]
 [ext_resource type="Script" uid="uid://cx0oxb0sgcmll" path="res://main/turn_manager.gd" id="2_pjrb6"]
+[ext_resource type="PackedScene" uid="uid://cc6rqji6i116i" path="res://ui/hud.tscn" id="3_4dugh"]
+[ext_resource type="PackedScene" uid="uid://noie5pq3tygd" path="res://ui/pause_menu.tscn" id="4_67ri8"]
+[ext_resource type="PackedScene" uid="uid://byfgo8htauayg" path="res://ui/options_menu.tscn" id="5_grrlh"]
+[ext_resource type="PackedScene" uid="uid://cla6hhj7i1fvv" path="res://ui/game_over_screen.tscn" id="6_0i4oc"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_53q0u"]
 
@@ -32,6 +36,16 @@ texture = SubResource("PlaceholderTexture2D_53q0u")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameRoot/World/StaticBody2D"]
 position = Vector2(229.25, 172.5)
 shape = SubResource("RectangleShape2D_pjrb6")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="Interface" instance=ExtResource("3_4dugh")]
+
+[node name="PauseMenu" parent="Interface" instance=ExtResource("4_67ri8")]
+
+[node name="OptionsMenu" parent="Interface" instance=ExtResource("5_grrlh")]
+
+[node name="GameOverScreen" parent="Interface" instance=ExtResource("6_0i4oc")]
 
 [node name="TurnManager" type="Node" parent="."]
 script = ExtResource("2_pjrb6")
