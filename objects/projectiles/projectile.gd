@@ -22,12 +22,14 @@ func _process(delta):
 	position += direction * projectile_data.speed * delta
 	
 func _on_projectile_area_entered(area):
-	if area is HurtboxComponent:
-		var attack = Attack.new()
-		attack.attack_damage = projectile_data.damage
-		area.damage(attack)
-		
-	# TODO: add world collision
+	#if area is HurtboxComponent:
+		#var attack = Attack.new()
+		#attack.attack_damage = projectile_data.damage
+		#area.damage(attack)
+		#
+	## TODO: add world collision
+	#queue_free()
+	pass
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()

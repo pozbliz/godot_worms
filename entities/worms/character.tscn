@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://coisauji2t45e"]
+[gd_scene load_steps=38 format=3 uid="uid://coisauji2t45e"]
 
 [ext_resource type="Script" uid="uid://bnk4241nx844v" path="res://entities/worms/character.gd" id="1_c0aes"]
 [ext_resource type="Shader" uid="uid://du7ub0j8jld23" path="res://entities/worms/hit_flash.gdshader" id="2_dwp3s"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://sqep1uv0i46i" path="res://entities/worms/states/jump_state.gd" id="6_lqksk"]
 [ext_resource type="Script" uid="uid://bj176aj65ia7n" path="res://entities/worms/states/walk_state.gd" id="7_ng2mp"]
 [ext_resource type="Script" uid="uid://5hl10unofp0t" path="res://entities/worms/states/fall_state.gd" id="8_a7elo"]
+[ext_resource type="PackedScene" uid="uid://dxdmyft2wwe03" path="res://entities/components/health_component.tscn" id="8_x07d0"]
+[ext_resource type="PackedScene" uid="uid://dl4xnmak5y8s7" path="res://entities/components/hurtbox_component.tscn" id="9_wqf1q"]
 [ext_resource type="Script" uid="uid://0capedttmv0p" path="res://entities/worms/states/aim_state.gd" id="11_ng2mp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n2mcv"]
@@ -221,6 +223,9 @@ _data = {
 &"walk": SubResource("Animation_lqksk")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_bwt5y"]
+radius = 8.0
+
 [node name="Character" type="CharacterBody2D"]
 position = Vector2(159, 91)
 collision_mask = 3
@@ -242,6 +247,17 @@ shape = SubResource("CircleShape2D_lqksk")
 libraries = {
 &"": SubResource("AnimationLibrary_j84ex")
 }
+
+[node name="HealthComponent" parent="." instance=ExtResource("8_x07d0")]
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_wqf1q")]
+collision_layer = 0
+collision_mask = 8
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_bwt5y")
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2(9, 0)
