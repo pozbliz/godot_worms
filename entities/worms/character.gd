@@ -53,6 +53,7 @@ func _ready() -> void:
 	crosshair.hide()
 	
 func _unhandled_input(_event: InputEvent) -> void:
+	print("character: ", _event)
 	if get_tree().paused:
 		return
 		
@@ -111,7 +112,6 @@ func start_turn() -> void:
 	camera_2d.enabled = true
 	jump_held_time = 0.0
 	coyote_timer = 0.0
-	print(velocity)
 	
 func end_turn() -> void:
 	state_machine.change_state(states.idle)

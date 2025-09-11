@@ -223,7 +223,7 @@ _data = {
 
 [node name="Character" type="CharacterBody2D"]
 position = Vector2(159, 91)
-collision_mask = 2
+collision_mask = 3
 script = ExtResource("1_c0aes")
 weapon_scenes = Array[PackedScene]([ExtResource("2_j84ex")])
 metadata/_edit_group_ = true

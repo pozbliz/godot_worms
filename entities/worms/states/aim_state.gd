@@ -11,12 +11,14 @@ func enter():
 	character.crosshair.show()
 
 func handle_input(event) -> void:
-	if event.is_action_pressed("shoot") and character.current_weapon and character.turn_active:
-		character.current_weapon.shoot(shoot_direction)
+	pass
 
 func physics_update(delta: float) -> void:
 	if Input.is_action_just_released("aim"):
 		state_machine.change_state(character.states.idle)
+	if Input.is_action_just_pressed("shoot") and character.current_weapon and character.turn_active:
+		character.current_weapon.shoot(shoot_direction)
+		
 	character.velocity.y += character.gravity * delta
 	character.move_and_slide()
 	
