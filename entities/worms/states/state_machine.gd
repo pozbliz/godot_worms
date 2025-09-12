@@ -11,7 +11,6 @@ func _ready():
 	change_state(initial_state)
 
 func _unhandled_input(event):
-	print("state machine: ", event)
 	if current_state and current_state.character.turn_active:
 		current_state.handle_input(event)
 

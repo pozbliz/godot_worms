@@ -53,7 +53,6 @@ func _ready() -> void:
 	crosshair.hide()
 	
 func _unhandled_input(_event: InputEvent) -> void:
-	print("character: ", _event)
 	if get_tree().paused:
 		return
 		

@@ -1,7 +1,7 @@
 extends Node
 
 
-@export var turn_time: float = 3.0
+@export var turn_time: float = 30.0
 
 var characters: Array[Character]
 var turn_order: Array[Character]
