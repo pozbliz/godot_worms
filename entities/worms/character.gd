@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var acceleration: float = 0.2
 @export var coyote_time: float = 0.1
 @export var max_jump_hold_time: float = 0.2
-@export var max_health: float = 1.0
+@export var max_health: float = 100.0
 @export var weapon_scenes: Array[PackedScene]
 
 var attack_damage: int = 1
