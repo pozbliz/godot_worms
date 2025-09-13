@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="ProjectileData" load_steps=3 format=3 uid="uid://cgri3nbenanc5"]
 
-[ext_resource type="Script" uid="uid://d34cnmf52xh2u" path="res://objects/projectiles/on_hit_explosion.gd" id="1_0a6kp"]
+[ext_resource type="PackedScene" uid="uid://ditpqvac06din" path="res://objects/projectiles/effect_explosion.tscn" id="1_0a6kp"]
 [ext_resource type="Script" uid="uid://b6xfsltlvwn6k" path="res://objects/projectiles/projectile_data.gd" id="1_ctm60"]
 
 [resource]
 script = ExtResource("1_ctm60")
 speed = 300.0
 damage = 30
-on_hit_script = ExtResource("1_0a6kp")
+on_hit_scene = ExtResource("1_0a6kp")
 metadata/_custom_type_script = "uid://b6xfsltlvwn6k"
