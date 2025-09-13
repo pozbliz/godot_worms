@@ -26,9 +26,11 @@ var current_weapon_index: int = 0
 var team: int = 1
 var turn_active: bool = false
 var worm_id: int
+var current_hp: float
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var world_collider: CollisionShape2D = $CollisionShape2D
+@onready var health_component: HealthComponent = $HealthComponent
 @onready var state_machine = $StateMachine
 @onready var states = {
 	"idle": $StateMachine/Idle,
@@ -42,12 +44,15 @@ var worm_id: int
 @onready var weapon_position_x_default: float = weapon_position.position.x
 @onready var crosshair: Sprite2D = $Crosshair
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var hp_bar = $HealthBar
 
 
 func _ready() -> void:
 	state_machine.change_state(states.idle)
 	add_to_group("character")
 	TurnManager.characters.append(self)
+	var ui_manager = get_tree().current_scene.get_node("Interface/HealthBarContainer")
+	ui_manager.register_entity(self)
 	
 	equip_weapon(0)
 	crosshair.hide()

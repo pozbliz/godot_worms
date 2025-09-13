@@ -15,6 +15,7 @@ func damage(attack: Attack):
 	
 	if get_parent() is Character:
 		get_parent().take_damage()
+		EventBus.health_changed.emit(current_health, max_health, get_parent())
 	
 	if current_health <= 0:
 		await get_parent().die()
