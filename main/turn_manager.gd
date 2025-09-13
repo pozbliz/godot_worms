@@ -5,40 +5,28 @@ extends Node
 
 var characters: Array[Character]
 var turn_order: Array[Character]
-var number_of_teams: int = 2
-var number_of_worms: int = 2
 var current_character: Character
 
 var time_left: float = 0.0
 var game_over: bool = false
+var turn_count: int = 0
 
 
 func _ready() -> void:
 	EventBus.character_died.connect(_on_character_died)
+	game_over = false
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if current_character:
 		current_character.state_machine._unhandled_input(event)
 		get_tree().root.set_input_as_handled()
-
-func assign_teams() -> void:
-	SettingsManager.load_settings()
-	number_of_teams = SettingsManager.number_of_teams
-	number_of_worms = SettingsManager.number_of_worms
-	
-	assert (characters.size() == number_of_teams * number_of_worms)
-	
-	game_over = false
-	
-	for i in range(characters.size()):
-		var team = i % number_of_teams
-		var chosen = characters[i]
-		
-	turn_order = characters.duplicate()
 	
 func start_turn() -> void:
 	if game_over:
 		return
+		
+	if turn_count == 0:
+		turn_order = characters.duplicate()
 	
 	if turn_order.is_empty():
 		EventBus.all_worms_died.emit()  # TODO: implement game over / game end
@@ -48,6 +36,7 @@ func start_turn() -> void:
 	
 	current_character.start_turn()
 	time_left = turn_time
+	turn_count += 1
 	
 func end_turn() -> void:
 	if current_character:

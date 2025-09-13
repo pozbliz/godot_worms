@@ -1,6 +1,5 @@
-[gd_scene load_steps=14 format=3 uid="uid://ditpqvac06din"]
+[gd_scene load_steps=13 format=3 uid="uid://ditpqvac06din"]
 
-[ext_resource type="Script" uid="uid://d34cnmf52xh2u" path="res://objects/projectiles/on_hit_explosion.gd" id="1_njqga"]
 [ext_resource type="Texture2D" uid="uid://4iqwob7ypkl0" path="res://assets/projectiles/explosion.png" id="2_by1nj"]
 [ext_resource type="PackedScene" uid="uid://dbp5w4wswvt1w" path="res://entities/components/hitbox_component.tscn" id="3_0ong1"]
 
@@ -72,7 +71,6 @@ animations = [{
 radius = 18.0
 
 [node name="Explosion" type="Node2D"]
-script = ExtResource("1_njqga")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)

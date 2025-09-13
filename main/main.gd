@@ -13,7 +13,6 @@ func _ready() -> void:
 	
 	create_level()
 	create_characters()
-	TurnManager.assign_teams()
 	TurnManager.start_turn()
 
 func _process(delta: float) -> void:
@@ -43,6 +42,7 @@ func create_characters() -> void:
 		char.worm_id = i + 1
 		char.team =  i % number_of_teams
 		char.add_to_group("team" + str(char.team + 1))
+		TurnManager.characters.append(char)
 		
 		# Tint by team color shader
 		var team_shader := preload("res://entities/worms/team_tint.gdshader")

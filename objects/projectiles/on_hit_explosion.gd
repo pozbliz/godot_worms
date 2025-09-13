@@ -1,4 +1,4 @@
-extends Node2D
+extends OnHitEffect
 
 
 @export var radius: float = 18.0
