@@ -50,7 +50,6 @@ var current_hp: float
 func _ready() -> void:
 	state_machine.change_state(states.idle)
 	add_to_group("character")
-	TurnManager.characters.append(self)
 	var ui_manager = get_tree().current_scene.get_node("Interface/HealthBarContainer")
 	ui_manager.register_entity(self)
 	
@@ -116,6 +115,7 @@ func start_turn() -> void:
 	camera_2d.enabled = true
 	jump_held_time = 0.0
 	coyote_timer = 0.0
+	#print($HealthComponent.current_health)
 	
 func end_turn() -> void:
 	state_machine.change_state(states.idle)

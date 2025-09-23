@@ -26,7 +26,7 @@ func create_characters() -> void:
 	number_of_teams = SettingsManager.number_of_teams
 	number_of_worms = SettingsManager.number_of_worms
 	var total_characters: int = number_of_teams * number_of_worms
-	var spawn_pos_margin: int = 100	
+	var spawn_pos_margin: int = 100
 	var team_colors = [
 		Color.RED,
 		Color.BLUE,
