@@ -4,6 +4,7 @@ extends Node
 ### CHARACTERS ###
 signal character_hit
 signal character_died(entity: Character)
+signal health_changed(current_health: float, max_health: float, entity: Node)
 signal jump_pressed
 
 ### WORLD ###
@@ -21,6 +22,5 @@ signal timer_updated(time_left)
 # Gameplay Signals
 signal level_started
 signal weapon_fired(weapon_name)
-signal health_changed(current_health: float, max_health: float, entity: Node)
 signal all_worms_died
 signal game_finished(team)  # TODO: implement game won screen

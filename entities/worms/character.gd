@@ -115,7 +115,7 @@ func start_turn() -> void:
 	camera_2d.enabled = true
 	jump_held_time = 0.0
 	coyote_timer = 0.0
-	#print($HealthComponent.current_health)
+	print($HealthComponent.current_health)
 	
 func end_turn() -> void:
 	state_machine.change_state(states.idle)
