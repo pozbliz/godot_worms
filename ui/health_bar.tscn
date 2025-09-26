@@ -16,8 +16,8 @@ border_width_right = 1
 border_width_bottom = 1
 
 [node name="HealthBar" type="ProgressBar"]
-offset_right = 4.0
-offset_bottom = 27.0
+offset_right = 70.0
+offset_bottom = 25.0
 theme_override_styles/background = SubResource("StyleBoxFlat_6htnt")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rwxrv")
 step = 1.0

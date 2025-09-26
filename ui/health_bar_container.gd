@@ -21,18 +21,16 @@ func register_entity(entity: Node):
 	entity_to_bar[entity.get_instance_id()] = bar_instance
 	_on_health_changed(health_comp.current_health, health_comp.max_health, entity)
 	
-#func _process(delta):  # TODO: rework to make hp bar follow worm
-	#for entity in entity_to_bar.keys():
-		#var bar = entity_to_bar[entity]
-		#if entity and bar:
-			#var cam = entity.get_viewport().get_camera_2d()
-			#if cam:
-				#var screen_pos = cam.unproject_position(entity.global_position + Vector2(0, -20))
-				#bar.position = screen_pos
+func _process(delta):  # TODO: rework to make hp bar follow worm
+	for entity_id in entity_to_bar.keys():
+		var entity: Node = instance_from_id(entity_id)
+		var bar = entity_to_bar[entity_id]
+		if entity and bar:
+			bar.global_position = entity.global_position
 				
 func _on_health_changed(current: float, max: float, entity: Node):  # TODO: fix worms not taking damage
 	var bar = entity_to_bar.get(entity.get_instance_id(), null)
-	print("before change - bar max:", bar.max_value, "bar current:", bar.value)
+	print("before change - bar max:", bar.max_value, " bar current:", bar.value)
 	if bar:
 		bar.max_value = max
 		bar.value = current
