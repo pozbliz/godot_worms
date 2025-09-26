@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var max_jump_hold_time: float = 0.2
 @export var max_health: float = 100.0
 @export var weapon_scenes: Array[PackedScene]
+@export var health_bar_scene: PackedScene
 
 var attack_damage: int = 1
 var coyote_timer: float = 0.0
@@ -26,7 +27,6 @@ var current_weapon_index: int = 0
 var team: int = 1
 var turn_active: bool = false
 var worm_id: int
-var current_hp: float
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var world_collider: CollisionShape2D = $CollisionShape2D
@@ -50,11 +50,13 @@ var current_hp: float
 func _ready() -> void:
 	state_machine.change_state(states.idle)
 	add_to_group("character")
-	var ui_manager = get_tree().current_scene.get_node("Interface/HealthBarContainer")
-	ui_manager.register_entity(self)
 	
 	equip_weapon(0)
 	crosshair.hide()
+	
+	hp_bar.max_value = health_component.max_health
+	hp_bar.value = health_component.current_health
+	hp_bar.hide()
 	
 func _unhandled_input(_event: InputEvent) -> void:
 	if get_tree().paused:
@@ -72,6 +74,7 @@ func _physics_process(delta: float) -> void:
 		dir = -1.0
 	weapon_position.position.x = weapon_position_x_default * dir
 	current_weapon.sprite_2d.flip_h = facing_direction_x < 0.0
+	hp_bar.global_position = global_position + Vector2(0, -40)
 	
 func play_animation(action: String) -> Signal:
 	sprite.play(action)
@@ -86,6 +89,9 @@ func take_damage() -> void:
 	var timer = get_tree().create_timer(invincibility_timer)
 	hit_flash(5)
 	timer.timeout.connect(_end_invincibility)
+	
+	hp_bar.show()
+	hp_bar.value = health_component.current_health  # TODO: hp bar only showing 1 dmg
 	
 func _end_invincibility() -> void:
 	is_invincible = false
