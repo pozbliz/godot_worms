@@ -58,14 +58,12 @@ func _on_character_died(character: Character) -> void:
 		return
 	character.is_dead_handled = true
 	turn_order.erase(character)
+	characters.erase(character)
 
 	var alive_teams := {}
 	for char in characters:
 		if not char.is_dead:
 			alive_teams[char.team] = true
-			
-	print(alive_teams)
-	print(alive_teams.size())
 			
 	if alive_teams.size() > 1:
 		return
@@ -76,10 +74,7 @@ func _on_character_died(character: Character) -> void:
 		EventBus.game_finished.emit(winner_team)
 		return
 		
-	print(alive_teams)
-	print(alive_teams.size())
 	if alive_teams.size() == 0:
-		print("draw")
 		# No teams alive → sudden draw
 		game_over = true
 		EventBus.game_finished.emit(null)
