@@ -1,8 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://coisauji2t45e"]
+[gd_scene load_steps=52 format=3 uid="uid://coisauji2t45e"]
 
 [ext_resource type="Script" uid="uid://bnk4241nx844v" path="res://entities/worms/character.gd" id="1_c0aes"]
 [ext_resource type="Shader" uid="uid://du7ub0j8jld23" path="res://entities/worms/hit_flash.gdshader" id="2_dwp3s"]
 [ext_resource type="PackedScene" uid="uid://dss6rdxr1i315" path="res://objects/weapons/bazooka.tscn" id="2_j84ex"]
+[ext_resource type="Texture2D" uid="uid://brtcj4xeet1td" path="res://assets/characters/worm_die.png" id="4_bwt5y"]
 [ext_resource type="Script" uid="uid://cqptrhwh4f6m" path="res://entities/worms/states/state_machine.gd" id="4_l3dd6"]
 [ext_resource type="Texture2D" uid="uid://bgid35mkrb5ix" path="res://assets/characters/worm_idle.png" id="4_lqksk"]
 [ext_resource type="Texture2D" uid="uid://davbb60ivqbbh" path="res://assets/characters/worm_fall.png" id="4_n2mcv"]
@@ -50,6 +51,38 @@ _bundled = {
 shader = ExtResource("2_dwp3s")
 shader_parameter/flash = false
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybjwe"]
+atlas = ExtResource("4_bwt5y")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpukd"]
+atlas = ExtResource("4_bwt5y")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i227t"]
+atlas = ExtResource("4_bwt5y")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjjpg"]
+atlas = ExtResource("4_bwt5y")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdcpn"]
+atlas = ExtResource("4_bwt5y")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irs3f"]
+atlas = ExtResource("4_bwt5y")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swjcf"]
+atlas = ExtResource("4_bwt5y")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8n2r"]
+atlas = ExtResource("4_bwt5y")
+region = Rect2(112, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_7nd7v"]
 atlas = ExtResource("4_n2mcv")
 region = Rect2(0, 0, 16, 16)
@@ -92,6 +125,35 @@ region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n2mcv"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybjwe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpukd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i227t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjjpg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdcpn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irs3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swjcf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8n2r")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7nd7v")
@@ -242,10 +304,27 @@ tracks/0/keys = {
 "values": [&"walk"]
 }
 
+[sub_resource type="Animation" id="Animation_bwt5y"]
+resource_name = "die"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"die"]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j84ex"]
 _data = {
 &"RESET": SubResource("Animation_j84ex"),
 &"aim": SubResource("Animation_ohcgm"),
+&"die": SubResource("Animation_bwt5y"),
 &"fall": SubResource("Animation_a7elo"),
 &"idle": SubResource("Animation_l3dd6"),
 &"jump": SubResource("Animation_ng2mp"),
@@ -259,6 +338,7 @@ radius = 8.0
 position = Vector2(159, 91)
 collision_mask = 3
 script = ExtResource("1_c0aes")
+max_health = 5.0
 weapon_scenes = Array[PackedScene]([ExtResource("2_j84ex")])
 health_bar_scene = SubResource("PackedScene_wqf1q")
 metadata/_edit_group_ = true
@@ -296,8 +376,6 @@ position = Vector2(9, 0)
 texture = ExtResource("6_a7elo")
 
 [node name="HealthBar" parent="." instance=ExtResource("11_wqf1q")]
-offset_bottom = -10.0
-show_percentage = false
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_l3dd6")

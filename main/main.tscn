@@ -31,6 +31,7 @@ character_scene = ExtResource("1_53q0u")
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("3_0i4oc")
+max_health = 200.0
 
 [node name="HealthComponent" parent="GameRoot/World/StaticBody2D" instance=ExtResource("4_0i4oc")]
 

@@ -125,5 +125,6 @@ func die() -> void:
 		
 	is_dead = true
 	
-	#play_animation("death")
+	await play_animation("die")
 	EventBus.character_died.emit(self)
+	queue_free()
