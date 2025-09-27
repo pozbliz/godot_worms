@@ -26,6 +26,10 @@ func _ready() -> void:
 	options_button.pressed.connect(_on_options_button_pressed)
 	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
 
+func _unhandled_input(event: InputEvent) -> void:  # TODO: pause menu cannot be closed with ESC
+	if event.is_action_pressed("open_menu"):
+		_on_resume_game_button_pressed()
+
 func open():
 	show()
 	resume_game_button.grab_focus()
@@ -36,6 +40,7 @@ func close():
 func _on_resume_game_button_pressed():
 	EventBus.menu_selected.emit()
 	EventBus.game_resumed.emit()
+	get_tree().paused = false
 	close()
 	
 func _on_how_to_play_button_pressed():

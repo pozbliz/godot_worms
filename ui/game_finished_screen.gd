@@ -22,6 +22,7 @@ func _ready() -> void:
 	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
 
 func open(team):
+	get_tree().paused = true
 	if not team:
 		winner_team_label.text = "DRAW"
 	else:

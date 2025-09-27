@@ -17,7 +17,15 @@ func _ready() -> void:
 	TurnManager.start_turn()
 	
 	EventBus.character_died.connect(spawn_tombstone)
-
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("open_menu"):
+			pause_game()
+			
+func pause_game():
+	get_tree().paused = true
+	EventBus.game_paused.emit()
+	
 func _process(delta: float) -> void:
 	pass
 	
