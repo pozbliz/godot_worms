@@ -3,6 +3,14 @@ extends Control
 signal main_menu_opened
 
 @onready var main_menu_button: Button = $MarginContainer/VBoxContainer/MainMenuButton
+@onready var winner_team_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/WinnerTeamLabel
+
+enum Team {
+	RED = 1,
+	BLUE = 2,
+	GREEN = 3,
+	YELLOW = 4
+}
 
 
 func _ready() -> void:
@@ -10,10 +18,15 @@ func _ready() -> void:
 	
 	hide()
 	
-	EventBus.game_over.connect(open)
+	EventBus.game_finished.connect(open)
 	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
 
-func open():
+func open(team):
+	if not team:
+		winner_team_label.text = "DRAW"
+	else:
+		var team_name = Team.keys()[Team.values().find(team)]
+		winner_team_label.text = team_name
 	show()
 	main_menu_button.grab_focus()
 

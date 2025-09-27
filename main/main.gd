@@ -43,7 +43,7 @@ func create_characters() -> void:
 		char.global_position.x = (i + 1) * (screen_size.x - spawn_pos_margin) / total_characters
 		char.global_position.y = 100 # TODO: set spawn y position - based on level?
 		char.worm_id = i + 1
-		char.team =  i % number_of_teams
+		char.team =  i % number_of_teams + 1
 		char.add_to_group("team" + str(char.team + 1))
 		TurnManager.characters.append(char)
 		

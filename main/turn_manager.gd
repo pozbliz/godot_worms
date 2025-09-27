@@ -54,13 +54,18 @@ func _process(delta: float) -> void:
 			end_turn()
 	
 func _on_character_died(character: Character) -> void:
+	if character.is_dead_handled:
+		return
+	character.is_dead_handled = true
 	turn_order.erase(character)
-	character.queue_free()
 
 	var alive_teams := {}
-	for char in turn_order:
+	for char in characters:
 		if not char.is_dead:
 			alive_teams[char.team] = true
+			
+	print(alive_teams)
+	print(alive_teams.size())
 			
 	if alive_teams.size() > 1:
 		return
@@ -71,6 +76,10 @@ func _on_character_died(character: Character) -> void:
 		EventBus.game_finished.emit(winner_team)
 		return
 		
-	# No teams alive → sudden draw
-	game_over = true
-	EventBus.game_finished.emit(null)
+	print(alive_teams)
+	print(alive_teams.size())
+	if alive_teams.size() == 0:
+		print("draw")
+		# No teams alive → sudden draw
+		game_over = true
+		EventBus.game_finished.emit(null)

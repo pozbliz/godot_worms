@@ -17,7 +17,6 @@ func _ready() -> void:
 	add_to_group("projectile")
 	
 	attack_damage = projectile_data.damage
-	print("set attack damage to: ", attack_damage)
 	
 	if projectile_data.on_hit_scene and projectile_data.on_hit_scene not in on_hit_scenes:
 		on_hit_scenes.append(projectile_data.on_hit_scene)

@@ -27,6 +27,7 @@ var current_weapon_index: int = 0
 var team: int = 1
 var turn_active: bool = false
 var worm_id: int
+var is_dead_handled: bool = false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var world_collider: CollisionShape2D = $CollisionShape2D
