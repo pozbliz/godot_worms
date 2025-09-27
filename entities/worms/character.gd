@@ -82,19 +82,10 @@ func play_animation(action: String) -> Signal:
 	return sprite.animation_finished
 	
 func take_damage() -> void:
-	if is_invincible:
-		return
-		
-	is_invincible = true
-	var timer = get_tree().create_timer(invincibility_timer)
 	hit_flash(5)
-	timer.timeout.connect(_end_invincibility)
 	
 	hp_bar.show()
 	hp_bar.value = health_component.current_health  # TODO: hp bar only showing 1 dmg
-	
-func _end_invincibility() -> void:
-	is_invincible = false
 	
 func hit_flash(blinks: int):
 	for i in range(0, blinks):

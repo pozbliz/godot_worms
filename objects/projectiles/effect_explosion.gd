@@ -2,7 +2,7 @@ extends Node2D
 
 
 @export var radius: int = 46
-@export var attack_damage: int = 15
+@export var attack_damage: int = 30
 
 
 func trigger(position: Vector2) -> void:
