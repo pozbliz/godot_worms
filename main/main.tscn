@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cmrei35c8kvww"]
+[gd_scene load_steps=15 format=3 uid="uid://cmrei35c8kvww"]
 
 [ext_resource type="PackedScene" uid="uid://coisauji2t45e" path="res://entities/worms/character.tscn" id="1_53q0u"]
 [ext_resource type="Script" uid="uid://t15a37poifvu" path="res://main/main.gd" id="1_xwkvk"]
 [ext_resource type="Script" uid="uid://cx0oxb0sgcmll" path="res://main/turn_manager.gd" id="2_pjrb6"]
 [ext_resource type="Script" uid="uid://bh6ffe8k6ua7y" path="res://world/world.gd" id="3_0i4oc"]
 [ext_resource type="PackedScene" uid="uid://cc6rqji6i116i" path="res://ui/hud.tscn" id="3_4dugh"]
+[ext_resource type="PackedScene" uid="uid://cr16kludhqg2c" path="res://objects/tombstone.tscn" id="3_bsumw"]
 [ext_resource type="PackedScene" uid="uid://dl4xnmak5y8s7" path="res://entities/components/hurtbox_component.tscn" id="3_grrlh"]
 [ext_resource type="PackedScene" uid="uid://dxdmyft2wwe03" path="res://entities/components/health_component.tscn" id="4_0i4oc"]
 [ext_resource type="PackedScene" uid="uid://noie5pq3tygd" path="res://ui/pause_menu.tscn" id="4_67ri8"]
@@ -24,6 +25,7 @@ size = Vector2(693.5, 55)
 [node name="GameRoot" type="Node2D" parent="."]
 script = ExtResource("1_xwkvk")
 character_scene = ExtResource("1_53q0u")
+tombstone_scene = ExtResource("3_bsumw")
 
 [node name="World" type="Node2D" parent="GameRoot"]
 

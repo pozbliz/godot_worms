@@ -2,6 +2,7 @@ extends Node2D
 
 
 @export var character_scene: PackedScene
+@export var tombstone_scene: PackedScene
 
 var number_of_teams: int = 2
 var number_of_worms: int = 2
@@ -14,6 +15,8 @@ func _ready() -> void:
 	create_level()
 	create_characters()
 	TurnManager.start_turn()
+	
+	EventBus.character_died.connect(spawn_tombstone)
 
 func _process(delta: float) -> void:
 	pass
@@ -59,3 +62,9 @@ func _apply_material_recursive(node: Node, mat: ShaderMaterial) -> void:
 	for child in node.get_children():
 		if child is Node:
 			_apply_material_recursive(child, mat)
+			
+func spawn_tombstone(entity: Character) -> void:
+	var tombstone = tombstone_scene.instantiate()
+	$World.add_child(tombstone)
+	tombstone.global_position = entity.global_position
+	tombstone.scale = Vector2(2,2)
