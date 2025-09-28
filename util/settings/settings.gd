@@ -10,6 +10,8 @@ func load_settings() -> void:
 	if config.load("user://options.cfg") == OK:
 		number_of_teams = config.get_value("gameplay", "number_of_teams", number_of_teams)
 		number_of_worms = config.get_value("gameplay", "number_of_worms", number_of_worms)
+		print("loading number of teams: ", number_of_teams)
+		print("loading number of worms: ", number_of_worms)
 
 func save_settings() -> void:
 	var config = ConfigFile.new()
