@@ -24,7 +24,7 @@ func shoot(shoot_direction: Vector2):
 	projectile.direction = shoot_direction
 	projectile.rotation = rotation
 
-	EventBus.weapon_fired.emit(weapon_data.name)
+	EventBus.weapon_fired_hit.emit(weapon_data.name)
 
 	# Optional VFX
 	if weapon_data.shoot_vfx:

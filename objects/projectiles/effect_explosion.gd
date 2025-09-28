@@ -16,4 +16,5 @@ func _setup_effect() -> void:
 	shape.shape.radius = radius
 
 	sprite.play("default")
+	EventBus.weapon_fired_hit.emit("explosion")
 	sprite.animation_finished.connect(Callable(self, "queue_free"))

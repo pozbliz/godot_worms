@@ -9,6 +9,7 @@ var character = {
 
 var weapons = {
 	"bazooka": "res://assets/weapons/bazooka_shoot.wav",
+	"explosion": "res://assets/weapons/explosion.wav"
 }
 
 var world = {
@@ -29,7 +30,7 @@ func _ready() -> void:
 	EventBus.character_hit.connect(_on_character_hit)
 	EventBus.character_died.connect(_on_character_died)
 	EventBus.jump_pressed.connect(_on_jump_pressed)
-	EventBus.weapon_fired.connect(_on_weapon_fired)
+	EventBus.weapon_fired_hit.connect(_on_weapon_fired)
 	
 	### WORLD ###
 	
