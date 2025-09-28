@@ -14,6 +14,7 @@ var attack_damage: int
 func _ready() -> void:
 	$VisibleOnScreenEnabler2D.screen_exited.connect(_on_visible_on_screen_notifier_2d_screen_exited)
 	$HitboxComponent.area_entered.connect(_on_projectile_area_entered)
+	$WorldCollider.area_entered.connect(_on_projectile_area_entered)
 	add_to_group("projectile")
 	
 	attack_damage = projectile_data.damage
@@ -28,6 +29,7 @@ func _process(delta: float) -> void:
 	position += direction * projectile_data.speed * delta
 
 func _on_projectile_area_entered(area: Area2D) -> void:
+	print("area entered: ", area)
 	var world = get_tree().current_scene.get_node("GameRoot/World")
 	
 	for effect_scene in on_hit_scenes:

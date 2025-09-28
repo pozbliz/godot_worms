@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://du225tgenw72m"]
+[gd_scene load_steps=8 format=3 uid="uid://du225tgenw72m"]
 
 [ext_resource type="Script" uid="uid://dqvvwmu156rr" path="res://objects/projectiles/projectile.gd" id="1_bhfqx"]
 [ext_resource type="PackedScene" uid="uid://dbp5w4wswvt1w" path="res://entities/components/hitbox_component.tscn" id="2_4voct"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://ditpqvac06din" path="res://objects/projectiles/effect_explosion.tscn" id="3_qw4hd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8jur"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qw4hd"]
 radius = 4.0
 
 [node name="Rocket" type="Node2D"]
@@ -24,6 +27,14 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(4, 0)
 shape = SubResource("CircleShape2D_u8jur")
+
+[node name="WorldCollider" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollider"]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_qw4hd")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(-7, 2.38419e-07)
