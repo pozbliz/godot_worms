@@ -67,7 +67,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 		return
 		
 func _physics_process(delta: float) -> void:
-	if not is_dead and global_position.y > viewport_size.y:
+	if not is_dead and global_position.y > viewport_size.y + 2000:
 		die()
 		
 	var dir: float = 1.0
@@ -86,7 +86,7 @@ func take_damage() -> void:
 	hit_flash(5)
 	
 	hp_bar.show()
-	hp_bar.value = health_component.current_health  # TODO: hp bar only showing 1 dmg
+	hp_bar.value = health_component.current_health
 	
 func hit_flash(blinks: int):
 	for i in range(0, blinks):
