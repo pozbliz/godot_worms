@@ -7,6 +7,10 @@ var character = {
 	"jump_pressed": "res://assets/sound/player/jump.wav",
 }
 
+var weapons = {
+	"bazooka": "res://assets/weapons/bazooka_shoot.wav",
+}
+
 var world = {
 	"mushroom_picked_up": "res://assets/sound/world/mushroom_picked_up.wav",
 }
@@ -25,6 +29,7 @@ func _ready() -> void:
 	EventBus.character_hit.connect(_on_character_hit)
 	EventBus.character_died.connect(_on_character_died)
 	EventBus.jump_pressed.connect(_on_jump_pressed)
+	EventBus.weapon_fired.connect(_on_weapon_fired)
 	
 	### WORLD ###
 	
@@ -45,7 +50,10 @@ func _on_character_died():
 	
 func _on_jump_pressed():
 	AudioManager.play(character["jump_pressed"])
-
+	
+func _on_weapon_fired(weapon: String):
+	if weapons.has(weapon):
+		AudioManager.play(weapons[weapon])
 
 ### WORLD ###
 
