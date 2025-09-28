@@ -31,3 +31,6 @@ func physics_update(delta: float) -> void:
 
 	if not character.is_on_floor():
 		state_machine.change_state(character.states.fall)
+		
+	if Input.is_action_just_pressed("next_weapon"):
+		character.equip_next_weapon()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=52 format=3 uid="uid://coisauji2t45e"]
+[gd_scene load_steps=53 format=3 uid="uid://coisauji2t45e"]
 
 [ext_resource type="Script" uid="uid://bnk4241nx844v" path="res://entities/worms/character.gd" id="1_c0aes"]
 [ext_resource type="Shader" uid="uid://du7ub0j8jld23" path="res://entities/worms/hit_flash.gdshader" id="2_dwp3s"]
 [ext_resource type="PackedScene" uid="uid://dss6rdxr1i315" path="res://objects/weapons/bazooka.tscn" id="2_j84ex"]
+[ext_resource type="PackedScene" uid="uid://dxax1phl0opiq" path="res://objects/weapons/shotgun.tscn" id="3_g3x03"]
 [ext_resource type="Texture2D" uid="uid://brtcj4xeet1td" path="res://assets/characters/worm_die.png" id="4_bwt5y"]
 [ext_resource type="Script" uid="uid://cqptrhwh4f6m" path="res://entities/worms/states/state_machine.gd" id="4_l3dd6"]
 [ext_resource type="Texture2D" uid="uid://bgid35mkrb5ix" path="res://assets/characters/worm_idle.png" id="4_lqksk"]
@@ -340,7 +341,7 @@ collision_mask = 3
 script = ExtResource("1_c0aes")
 speed = 100.0
 jump_velocity = -400.0
-weapon_scenes = Array[PackedScene]([ExtResource("2_j84ex")])
+weapon_scenes = Array[PackedScene]([ExtResource("2_j84ex"), ExtResource("3_g3x03")])
 health_bar_scene = SubResource("PackedScene_wqf1q")
 metadata/_edit_group_ = true
 

@@ -18,10 +18,6 @@ func _ready() -> void:
 	
 	EventBus.character_died.connect(spawn_tombstone)
 	
-#func _unhandled_input(event: InputEvent) -> void:
-	#if event.is_action_pressed("open_menu"):
-			#pause_game()
-			
 func pause_game():
 	get_tree().paused = true
 	EventBus.game_paused.emit()
@@ -38,7 +34,6 @@ func create_characters() -> void:
 	number_of_teams = SettingsManager.number_of_teams
 	number_of_worms = SettingsManager.number_of_worms
 	var total_characters: int = number_of_teams * number_of_worms
-	print(total_characters)
 	var spawn_pos_margin: int = 100
 	var team_colors = [
 		Color.RED,
