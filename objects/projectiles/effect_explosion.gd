@@ -16,4 +16,4 @@ func _setup_effect() -> void:
 	shape.shape.radius = radius
 
 	sprite.play("default")
-	sprite.connect("animation_finished", Callable(self, "queue_free"))
+	sprite.animation_finished.connect(Callable(self, "queue_free"))

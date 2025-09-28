@@ -18,16 +18,17 @@ func _ready() -> void:
 	
 	EventBus.character_died.connect(spawn_tombstone)
 	
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("open_menu"):
-			pause_game()
+#func _unhandled_input(event: InputEvent) -> void:
+	#if event.is_action_pressed("open_menu"):
+			#pause_game()
 			
 func pause_game():
 	get_tree().paused = true
 	EventBus.game_paused.emit()
 	
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("open_menu"):
+		pause_game()
 	
 func create_level() -> void:
 	pass

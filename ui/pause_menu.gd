@@ -1,8 +1,4 @@
-# pause_menu.gd
 extends Control
-
-signal level_finished
-signal main_menu_opened
 
 @onready var resume_game_button: Button = $MarginContainer/VBoxContainer/ResumeGameButton
 @onready var how_to_play_button: Button = $MarginContainer/VBoxContainer/HowToPlayButton
@@ -26,9 +22,10 @@ func _ready() -> void:
 	options_button.pressed.connect(_on_options_button_pressed)
 	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
 
-func _unhandled_input(event: InputEvent) -> void:  # TODO: pause menu cannot be closed with ESC
-	if event.is_action_pressed("open_menu"):
-		_on_resume_game_button_pressed()
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("open_menu"):
+		if visible:
+			_on_resume_game_button_pressed()
 
 func open():
 	show()
@@ -55,5 +52,5 @@ func _on_options_button_pressed():
 	
 func _on_main_menu_button_pressed():
 	EventBus.menu_selected.emit()
-	EventBus.main_menu_opened.emit()
-	close()
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://ui/ui.tscn")

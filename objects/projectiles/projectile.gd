@@ -29,7 +29,6 @@ func _process(delta: float) -> void:
 	position += direction * projectile_data.speed * delta
 
 func _on_projectile_area_entered(area: Area2D) -> void:
-	print("area entered: ", area)
 	var world = get_tree().current_scene.get_node("GameRoot/World")
 	
 	for effect_scene in on_hit_scenes:
@@ -38,7 +37,6 @@ func _on_projectile_area_entered(area: Area2D) -> void:
 			world.add_child(effect_instance)
 			effect_instance.trigger(global_position)
 			
-	# TODO: add world collision if needed
 	queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
