@@ -105,10 +105,7 @@ func equip_weapon(index: int):
 	current_weapon.position = Vector2.ZERO
 	current_weapon_index = index
 	
-	print("current weapon: ", current_weapon, ", ", current_weapon_index)
-	
 func equip_next_weapon():
-	print("equiping next weapon")
 	var new_weapon_index = (current_weapon_index + 1) % weapon_scenes.size()
 	equip_weapon(new_weapon_index)
 	

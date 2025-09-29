@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func damage(attack: Attack):
 	current_health -= attack.attack_damage
+	print("taking damage: ", attack.attack_damage)
 	
 	if get_parent() is Character:
 		get_parent().take_damage()

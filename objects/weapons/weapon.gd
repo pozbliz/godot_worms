@@ -12,7 +12,7 @@ var shots_taken: int = 0
 func _ready():
 	pass
 
-func shoot(shoot_direction: Vector2):
+func shoot(shoot_direction: Vector2):  # TODO: shotgun dealing 0 damage
 	if on_cooldown or shots_taken >= weapon_data.number_of_shots or not weapon_data:
 		return
 
@@ -34,7 +34,6 @@ func shoot(shoot_direction: Vector2):
 
 	# Cooldown
 	shots_taken += 1
-	
 	if shots_taken < weapon_data.number_of_shots:
 		on_cooldown = true
 		await get_tree().create_timer(weapon_data.cooldown).timeout

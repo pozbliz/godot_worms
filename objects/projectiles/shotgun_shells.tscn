@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqvvwmu156rr" path="res://objects/projectiles/projectile.gd" id="1_nxyt0"]
 [ext_resource type="PackedScene" uid="uid://dbp5w4wswvt1w" path="res://entities/components/hitbox_component.tscn" id="2_lrjtm"]
-[ext_resource type="Resource" uid="uid://bqxg167u76dh5" path="res://objects/projectiles/shotgun_rounds.tres" id="2_pxgb4"]
+[ext_resource type="Resource" uid="uid://bqxg167u76dh5" path="res://objects/projectiles/shotgun_shells.tres" id="2_pxgb4"]
 [ext_resource type="Texture2D" uid="uid://danh2d0qq0dag" path="res://assets/projectiles/shotgun_shells.png" id="3_pxgb4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8jur"]
