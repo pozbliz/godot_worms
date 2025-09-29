@@ -99,6 +99,7 @@ func hit_flash(blinks: int):
 func equip_weapon(index: int):
 	if index < 0 or index >= weapon_scenes.size():
 		return
+		
 	if current_weapon:
 		current_weapon.queue_free()
 	current_weapon = weapon_scenes[index].instantiate()
