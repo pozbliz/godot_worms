@@ -28,6 +28,7 @@ var team: int = 1
 var turn_active: bool = false
 var worm_id: int
 var is_dead_handled: bool = false
+var can_shoot_other_weapon: bool = true
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var world_collider: CollisionShape2D = $CollisionShape2D
@@ -106,6 +107,9 @@ func equip_weapon(index: int):
 	current_weapon_index = index
 	
 func equip_next_weapon():
+	if not can_shoot_other_weapon:
+		return
+		
 	var new_weapon_index = (current_weapon_index + 1) % weapon_scenes.size()
 	equip_weapon(new_weapon_index)
 	
@@ -117,6 +121,7 @@ func start_turn() -> void:
 	camera_2d.enabled = true
 	jump_held_time = 0.0
 	coyote_timer = 0.0
+	can_shoot_other_weapon = true
 	
 func end_turn() -> void:
 	state_machine.change_state(states.idle)
