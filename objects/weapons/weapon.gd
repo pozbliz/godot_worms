@@ -12,7 +12,7 @@ var shots_taken: int = 0
 func _ready():
 	pass
 
-func shoot(shoot_direction: Vector2):  # TODO: shotgun dealing 0 damage
+func shoot(shoot_direction: Vector2):
 	if on_cooldown or shots_taken >= weapon_data.number_of_shots or not weapon_data:
 		return
 

@@ -19,6 +19,7 @@ func _ready() -> void:
 	hide()
 	
 	EventBus.game_finished.connect(open)
+	EventBus.all_worms_died.connect(open)
 	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
 
 func open(team):

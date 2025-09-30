@@ -30,7 +30,7 @@ func start_turn() -> void:
 		turn_order = characters.duplicate()
 	
 	if turn_order.is_empty():
-		EventBus.all_worms_died.emit()  # TODO: implement game over / game end
+		EventBus.all_worms_died.emit()
 		return
 		
 	current_character = turn_order.pop_front()
