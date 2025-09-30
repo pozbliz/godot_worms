@@ -1,3 +1,4 @@
+class_name TurnManager
 extends Node
 
 
@@ -15,6 +16,8 @@ var turn_count: int = 0
 func _ready() -> void:
 	EventBus.character_died.connect(_on_character_died)
 	game_over = false
+	print("turn manager ready")
+	print(get_tree().paused)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if current_character:
@@ -30,6 +33,7 @@ func start_turn() -> void:
 	
 	if turn_order.is_empty():
 		EventBus.all_worms_died.emit()  # TODO: implement game over / game end
+		return
 		
 	current_character = turn_order.pop_front()
 	turn_order.append(current_character)
@@ -78,3 +82,4 @@ func _on_character_died(character: Character) -> void:
 		# No teams alive → sudden draw
 		game_over = true
 		EventBus.game_finished.emit(null)
+		

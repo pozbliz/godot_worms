@@ -8,15 +8,18 @@ var number_of_teams: int = 2
 var number_of_worms: int = 2
 var screen_size: Vector2
 
+@onready var turn_manager: TurnManager = $TurnManager
+
+
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	
 	create_level()
 	create_characters()
-	TurnManager.start_turn()
 	
 	EventBus.character_died.connect(spawn_tombstone)
+	turn_manager.start_turn()
 	
 func pause_game():
 	get_tree().paused = true
@@ -30,7 +33,6 @@ func create_level() -> void:
 	pass
 	
 func create_characters() -> void:
-	SettingsManager.load_settings()
 	number_of_teams = SettingsManager.number_of_teams
 	number_of_worms = SettingsManager.number_of_worms
 	var total_characters: int = number_of_teams * number_of_worms
@@ -50,7 +52,7 @@ func create_characters() -> void:
 		char.worm_id = i + 1
 		char.team =  i % number_of_teams + 1
 		char.add_to_group("team" + str(char.team + 1))
-		TurnManager.characters.append(char)
+		turn_manager.characters.append(char)
 		
 		# Tint by team color shader
 		var team_shader := preload("res://entities/worms/team_tint.gdshader")

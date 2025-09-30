@@ -30,9 +30,6 @@ func close():
 func _on_settings_changed(index: int):
 	SettingsManager.number_of_teams = int(number_teams_option.text)
 	SettingsManager.number_of_worms = int(number_worms_option.text)
-	print(number_teams_option.text)
-	print(number_worms_option.text)
-	SettingsManager.save_settings()
 	
 func _on_back_button_pressed():
 	EventBus.menu_selected.emit()
