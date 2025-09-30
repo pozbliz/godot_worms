@@ -6,4 +6,6 @@
 script = ExtResource("1_074k3")
 speed = 500.0
 damage = 20
+damage_dropoff_enabled = true
+max_range = 100.0
 metadata/_custom_type_script = "uid://b6xfsltlvwn6k"

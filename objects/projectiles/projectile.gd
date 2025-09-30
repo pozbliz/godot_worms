@@ -7,6 +7,7 @@ extends Node2D
 
 var direction: Vector2 = Vector2.ZERO
 var attack_damage: int
+var distance_traveled: float = 0.0
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -26,7 +27,19 @@ func _process(delta: float) -> void:
 	if get_tree().paused:
 		return
 		
-	position += direction * projectile_data.speed * delta
+	var move = direction * projectile_data.speed * delta
+	position += move
+	distance_traveled += move.length()
+	
+	if projectile_data.damage_dropoff_enabled:
+		$HitboxComponent.attack_damage = _calculate_damage_dropoff(distance_traveled)
+		
+func _calculate_damage_dropoff(distance: float) -> int:
+	var max_range = projectile_data.max_range
+	var min_damage_factor = 0.5
+
+	var factor = clamp(1.0 - distance / max_range, min_damage_factor, 1.0)
+	return int(projectile_data.damage * factor)
 
 func _on_projectile_area_entered(area: Area2D) -> void:
 	var world = get_tree().current_scene.get_node("GameRoot/World")

@@ -11,6 +11,7 @@ func _ready() -> void:
 	current_health = max_health
 
 func damage(attack: Attack):
+	print("damage: ", attack.attack_damage)
 	current_health -= attack.attack_damage
 	
 	if get_parent() is Character:
