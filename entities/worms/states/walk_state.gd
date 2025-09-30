@@ -9,9 +9,7 @@ func enter():
 	character.play_animation("walk")
 	
 func handle_input(event) -> void:
-	character.input_direction_x = Input.get_axis("move_left", "move_right")
-	if Input.is_action_just_pressed("jump") and character.coyote_timer > 0:
-		state_machine.change_state(character.states.jump)
+	pass
 
 func physics_update(delta: float) -> void:
 	if not character.turn_active:
@@ -45,6 +43,9 @@ func physics_update(delta: float) -> void:
 
 	if character.coyote_timer <= 0 and character.velocity.y > 0:
 		state_machine.change_state(character.states.fall)
+	character.input_direction_x = Input.get_axis("move_left", "move_right")
+	if Input.is_action_just_pressed("jump") and character.coyote_timer > 0:
+		state_machine.change_state(character.states.jump)
 	if Input.is_action_pressed("aim") and character.current_weapon and character.turn_active:
 		character.aim()
 	elif is_equal_approx(character.input_direction_x, 0.0):

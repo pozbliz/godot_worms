@@ -7,10 +7,7 @@ func enter():
 	character.play_animation("idle")
 	
 func handle_input(event) -> void:
-	if Input.is_action_just_pressed("jump"):
-		state_machine.change_state(character.states.jump)
-	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-		state_machine.change_state(character.states.walk)
+	pass
 
 func physics_update(delta: float) -> void:
 	if not character.turn_active:
@@ -23,6 +20,10 @@ func physics_update(delta: float) -> void:
 			state_machine.change_state(character.states.fall)
 		return
 		
+	if Input.is_action_just_pressed("jump"):
+		state_machine.change_state(character.states.jump)
+	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+		state_machine.change_state(character.states.walk)
 	if Input.is_action_pressed("aim") and character.current_weapon and character.turn_active:
 		character.aim()
 	character.velocity.y += character.gravity * delta

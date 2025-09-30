@@ -16,8 +16,6 @@ var turn_count: int = 0
 func _ready() -> void:
 	EventBus.character_died.connect(_on_character_died)
 	game_over = false
-	print("turn manager ready")
-	print(get_tree().paused)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if current_character:
