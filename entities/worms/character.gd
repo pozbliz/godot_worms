@@ -123,6 +123,8 @@ func start_turn() -> void:
 	jump_held_time = 0.0
 	coyote_timer = 0.0
 	can_shoot_other_weapon = true
+	current_weapon.shots_taken = 0
+	current_weapon.on_cooldown = false
 	
 func end_turn() -> void:
 	state_machine.change_state(states.idle)
