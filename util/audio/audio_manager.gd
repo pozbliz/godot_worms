@@ -27,6 +27,7 @@ func _ready():
 		
 func _on_stream_finished(stream):
 	available.append(stream)
+	print(available)
 	
 ### --- SFX --- ###
 func play(
@@ -59,6 +60,10 @@ func _process(_delta):
 		player.bus = sound_data.bus
 		
 		player.play()
+		
+		for p in get_children():
+			if p is AudioStreamPlayer and not p.playing and not available.has(p) and p != music_player:
+				available.append(p)
 		
 ### --- MUSIC --- ###
 func play_music(sound_path: String, loop: bool = true, volume_db: float = 0.0):

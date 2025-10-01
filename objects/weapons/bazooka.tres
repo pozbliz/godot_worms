@@ -7,6 +7,6 @@
 script = ExtResource("1_fuatv")
 name = "bazooka"
 projectile_scene = ExtResource("1_8akpy")
-cooldown = 10
-number_of_shots = 1
+cooldown = 1
+number_of_shots = 5
 metadata/_custom_type_script = "uid://5mrlmabn8unf"
