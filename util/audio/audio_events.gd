@@ -9,7 +9,8 @@ var character = {
 
 var weapons = {
 	"bazooka": "res://assets/weapons/bazooka_shoot.wav",
-	"explosion": "res://assets/weapons/explosion.wav"
+	"explosion": "res://assets/weapons/explosion.wav",
+	"shotgun": "res://assets/weapons/544676__clueless79__shotgun-02.wav"
 }
 
 var world = {
