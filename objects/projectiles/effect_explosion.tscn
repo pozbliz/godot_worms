@@ -83,3 +83,8 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_4f1f3")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(-12, -32, 12, -32, 26, -22, 32, -8, 32, 8, 26, 21, 13, 32, -13, 32, -26, 23, -32, 8, -32, -8, -27, -22)
+uv = PackedVector2Array(-14.9539, -29.8205, 9, -30, 30, -20, 30, 14, 11, 30, -16, 30, -30, 14, -30, -15)

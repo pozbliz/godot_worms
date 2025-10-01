@@ -1,11 +1,20 @@
 extends Node2D
 
 @onready var level: TextureRect = $Level
-@onready var collision: CollisionPolygon2D = $CollisionPolygon2D
+@onready var terrain_collider: CollisionPolygon2D = $CollisionPolygon2D
 @onready var background: TextureRect = $Background
 
-var terrain_image: Image
-var terrain_texture: ImageTexture
+var terrain_polygon : PackedVector2Array
+
+
+func _ready() -> void:
+	EventBus.explosion_triggered.connect(calculate_terrain_destruction)
+	terrain_polygon = $CollisionPolygon2D.polygon
+
+func calculate_terrain_destruction(destruction_polygon) -> void:
+	var result = Geometry2D.clip_polygons(terrain_polygon, destruction_polygon)
+	$CollisionPolygon2D.polygon = result[0]
+
 
 #func _ready():
 	#terrain_image = level.texture.get_image()

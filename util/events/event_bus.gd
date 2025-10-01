@@ -22,5 +22,6 @@ signal timer_updated(time_left)
 # Gameplay Signals
 signal level_started
 signal weapon_fired_hit(weapon_name: String)
+signal explosion_triggered(polygon: PackedVector2Array)
 signal all_worms_died
 signal game_finished(team)
