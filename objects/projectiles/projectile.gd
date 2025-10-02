@@ -41,14 +41,14 @@ func _calculate_damage_dropoff(distance: float) -> int:
 	var factor = clamp(1.0 - distance / max_range, min_damage_factor, 1.0)
 	return int(projectile_data.damage * factor)
 
-func _on_projectile_area_entered(area: Area2D) -> void:
+func _on_projectile_area_entered(_area: Area2D) -> void:
 	var world = get_tree().current_scene.get_node("GameRoot/World")
 	
 	for effect_scene in on_hit_scenes:
 		if effect_scene:
 			var effect_instance = effect_scene.instantiate()
-			world.add_child(effect_instance)
-			effect_instance.trigger(global_position)
+			world.call_deferred("add_child", effect_instance)
+			effect_instance.call_deferred("trigger", global_position)
 			
 	queue_free()
 

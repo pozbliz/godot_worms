@@ -67,7 +67,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if not turn_active:
 		return
 		
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not is_dead and global_position.y > viewport_size.y + 2000:
 		die()
 		

@@ -1,7 +1,5 @@
 extends Control
 
-signal main_menu_opened
-
 @onready var main_menu_button: Button = $MarginContainer/VBoxContainer/MainMenuButton
 @onready var winner_team_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/WinnerTeamLabel
 

@@ -1,8 +1,6 @@
 # pause_menu.gd
 extends Control
 
-signal options_menu_opened
-
 @onready var back_button: Button = $MarginContainer/VBoxContainer/BackButton
 
 

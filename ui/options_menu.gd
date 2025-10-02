@@ -27,7 +27,7 @@ func open():
 func close():
 	hide()
 	
-func _on_settings_changed(index: int):
+func _on_settings_changed(_index: int):
 	SettingsManager.number_of_teams = int(number_teams_option.text)
 	SettingsManager.number_of_worms = int(number_worms_option.text)
 	

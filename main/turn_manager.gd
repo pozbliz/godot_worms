@@ -63,9 +63,9 @@ func _on_character_died(character: Character) -> void:
 	characters.erase(character)
 
 	var alive_teams := {}
-	for char in characters:
-		if not char.is_dead:
-			alive_teams[char.team] = true
+	for member in characters:
+		if not member.is_dead:
+			alive_teams[member.team] = true
 			
 	if alive_teams.size() > 1:
 		return

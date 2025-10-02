@@ -8,9 +8,6 @@ extends State
 func enter():
 	character.play_animation("walk")
 	
-func handle_input(event) -> void:
-	pass
-
 func physics_update(delta: float) -> void:
 	if not character.turn_active:
 		character.velocity.x = 0

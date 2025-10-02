@@ -1,7 +1,5 @@
 extends Control
 
-signal main_menu_opened
-
 @onready var main_menu_button: Button = $MarginContainer/VBoxContainer/MainMenuButton
 
 

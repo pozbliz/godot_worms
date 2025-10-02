@@ -6,9 +6,6 @@ func enter():
 	character.velocity.x = 0.0
 	character.play_animation("idle")
 	
-func handle_input(event) -> void:
-	pass
-
 func physics_update(delta: float) -> void:
 	if not character.turn_active:
 		character.velocity.x = 0

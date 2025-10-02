@@ -7,8 +7,8 @@ extends Node2D
 var polygon : PackedVector2Array
 
 
-func trigger(position: Vector2) -> void:
-	global_position = position
+func trigger(pos: Vector2) -> void:
+	global_position = pos
 	call_deferred("_setup_effect")
 
 func _setup_effect() -> void:

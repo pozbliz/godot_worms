@@ -25,7 +25,7 @@ func pause_game():
 	get_tree().paused = true
 	EventBus.game_paused.emit()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("open_menu"):
 		pause_game()
 	
@@ -45,23 +45,23 @@ func create_characters() -> void:
 	]
 	
 	for i in range(total_characters):
-		var char = character_scene.instantiate()
-		$World.add_child(char)
-		char.global_position.x = (i + 1) * (screen_size.x - spawn_pos_margin) / total_characters
-		char.global_position.y = 100
-		char.worm_id = i + 1
-		char.team =  i % number_of_teams + 1
-		char.add_to_group("team" + str(char.team + 1))
-		turn_manager.characters.append(char)
+		var member = character_scene.instantiate()
+		$World.add_child(member)
+		member.global_position.x = (i + 1) * (screen_size.x - spawn_pos_margin) / total_characters
+		member.global_position.y = 100
+		member.worm_id = i + 1
+		member.team =  i % number_of_teams + 1
+		member.add_to_group("team" + str(member.team + 1))
+		turn_manager.characters.append(member)
 		
 		# Tint by team color shader
 		var team_shader := preload("res://entities/worms/team_tint.gdshader")
 		var mat := ShaderMaterial.new()
 		mat.shader = team_shader
-		mat.set_shader_parameter("team_color", team_colors[char.team % team_colors.size()])
+		mat.set_shader_parameter("team_color", team_colors[member.team % team_colors.size()])
 		mat.set_shader_parameter("tint_strength", 0.18)
 
-		_apply_material_recursive(char, mat)
+		_apply_material_recursive(member, mat)
 		
 func _apply_material_recursive(node: Node, mat: ShaderMaterial) -> void:
 	if node is Sprite2D or node is AnimatedSprite2D:

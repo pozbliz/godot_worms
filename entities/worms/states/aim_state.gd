@@ -9,10 +9,7 @@ func enter():
 	character.play_animation("idle")
 	character.velocity.x = 0
 	character.crosshair.show()
-
-func handle_input(event) -> void:
-	pass
-
+	
 func physics_update(delta: float) -> void:
 	if Input.is_action_just_released("aim"):
 		state_machine.change_state(character.states.idle)
