@@ -4,7 +4,6 @@ extends Node
 ### CHARACTERS ###
 signal character_hit
 signal character_died(entity: Character)
-signal health_changed(current_health: float, max_health: float, entity: Node)
 signal jump_pressed
 
 ### WORLD ###

@@ -88,6 +88,7 @@ func take_damage() -> void:
 	
 	hp_bar.show()
 	hp_bar.value = health_component.current_health
+	EventBus.character_hit.emit()
 	
 func hit_flash(blinks: int):
 	for i in range(0, blinks):

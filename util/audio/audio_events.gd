@@ -2,8 +2,8 @@ extends Node
 
 
 var character = {
-	"character_hit": "res://assets/sound/player/player_hit.wav",
-	"character_died": "res://assets/sound/player/player_died.wav",
+	"character_hit": "res://assets/characters/character_hit.mp3",
+	"character_died": "res://assets/sound/player/character_died.wav",
 	"jump_pressed": "res://assets/sound/player/jump.wav",
 }
 
@@ -44,7 +44,7 @@ func _ready() -> void:
 
 ### CHARACTERS ###
 func _on_character_hit():
-	AudioManager.play(character["character_hit"])
+	AudioManager.play(character["character_hit"], 1.0, 10.0)
 
 func _on_character_died():
 	AudioManager.stop_music()
