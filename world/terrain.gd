@@ -1,6 +1,7 @@
 extends Node2D
 
 var terrain_polygons : Array = []
+var level_texture
 
 func _ready() -> void:
 	EventBus.explosion_triggered.connect(calculate_terrain_destruction)
@@ -10,6 +11,9 @@ func _ready() -> void:
 	for p in $CollisionPolygon2D.polygon:
 		g.append($CollisionPolygon2D.to_global(p))
 	terrain_polygons.append(g)
+	
+	level_texture = $Level.texture
+	update_terrain_visual()
 	
 func calculate_terrain_destruction(destruction_polygon: PackedVector2Array, explosion_node: Node2D) -> void:
 	var destruction_global = to_global_polygon(explosion_node, destruction_polygon)
@@ -38,6 +42,37 @@ func calculate_terrain_destruction(destruction_polygon: PackedVector2Array, expl
 		var coll = CollisionPolygon2D.new()
 		coll.polygon = local_poly
 		add_child(coll)
+		
+	# rebuild projectile and visual to match collider
+	update_projectile_collider()
+	update_terrain_visual()
+		
+func update_projectile_collider() -> void:
+	var collider_node = $ProjectileCollider
+
+	for child in collider_node.get_children():
+		if child is CollisionPolygon2D:
+			child.queue_free()
+
+	# create new polygons matching the terrain
+	for poly in terrain_polygons:
+		var local_poly = to_local_polygon(collider_node, poly)
+		var coll = CollisionPolygon2D.new()
+		coll.polygon = local_poly
+		collider_node.add_child(coll)
+		
+func update_terrain_visual():
+	for child in get_children():
+		if child is Polygon2D:
+			child.queue_free()
+
+	# draw new polygons with texture
+	for poly in terrain_polygons:
+		var poly_node = Polygon2D.new()
+		poly_node.polygon = to_local_polygon(self, poly)
+		poly_node.texture = level_texture
+		poly_node.z_index = 0
+		add_child(poly_node)
 
 # Helpers -------------------------------------------------------------------
 

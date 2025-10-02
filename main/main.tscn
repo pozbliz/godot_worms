@@ -48,9 +48,8 @@ offset_right = 2560.0
 offset_bottom = 1440.0
 texture = ExtResource("5_na0o7")
 
-[node name="Level" type="TextureRect" parent="GameRoot/World/Terrain"]
-offset_right = 2560.0
-offset_bottom = 1440.0
+[node name="Level" type="Polygon2D" parent="GameRoot/World/Terrain"]
+z_index = 2
 texture = ExtResource("5_fwcvl")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GameRoot/World/Terrain"]
