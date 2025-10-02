@@ -22,7 +22,8 @@ var music = {
 }
 
 var menu = {
-	"select": "res://assets/sound/menu/menu_select.wav"
+	"select": "res://assets/menus/menu_selected.wav",
+	"game_started": "res://assets/menus/game_started.ogg"
 }
 
 
@@ -40,6 +41,7 @@ func _ready() -> void:
 	
 	### MENU ###
 	EventBus.menu_selected.connect(_on_menu_selected)
+	EventBus.game_started.connect(_on_game_started)
 	
 
 ### CHARACTERS ###
@@ -68,3 +70,6 @@ func _on_level_started(level: int):
 ### MENU ###
 func _on_menu_selected():
 	AudioManager.play(menu["select"])
+	
+func _on_game_started():
+	AudioManager.play(menu["game_started"])

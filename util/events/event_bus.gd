@@ -8,6 +8,7 @@ signal jump_pressed
 
 ### WORLD ###
 # UI Signals
+signal game_started
 signal game_paused
 signal game_resumed
 signal options_menu_opened
