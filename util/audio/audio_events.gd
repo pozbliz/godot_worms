@@ -3,8 +3,8 @@ extends Node
 
 var character = {
 	"character_hit": "res://assets/characters/character_hit.mp3",
-	"character_died": "res://assets/sound/player/character_died.wav",
-	"jump_pressed": "res://assets/sound/player/jump.wav",
+	"character_died": "res://assets/characters/character_died.wav",
+	"jump_pressed": "res://assets/characters/jump.wav",
 }
 
 var weapons = {
@@ -44,10 +44,9 @@ func _ready() -> void:
 
 ### CHARACTERS ###
 func _on_character_hit():
-	AudioManager.play(character["character_hit"], 1.0, 10.0)
+	AudioManager.play(character["character_hit"], 1.0, 15.0)
 
-func _on_character_died():
-	AudioManager.stop_music()
+func _on_character_died(_char: Character):
 	AudioManager.play(character["character_died"])
 	
 func _on_jump_pressed():
