@@ -7,10 +7,10 @@ func _ready() -> void:
 	EventBus.explosion_triggered.connect(calculate_terrain_destruction)
 	
 	terrain_polygons.clear()
-	var g = PackedVector2Array()
-	for p in $CollisionPolygon2D.polygon:
-		g.append($CollisionPolygon2D.to_global(p))
-	terrain_polygons.append(g)
+	var global_points = PackedVector2Array()
+	for point in $CollisionPolygon2D.polygon:
+		global_points.append($CollisionPolygon2D.to_global(point))
+	terrain_polygons.append(global_points)
 	
 	level_texture = $Level.texture
 	update_terrain_visual()
@@ -20,9 +20,9 @@ func calculate_terrain_destruction(destruction_polygon: PackedVector2Array, expl
 	var new_terrain_polygons : Array = []
 
 	# Clip each existing terrain piece against the destruction
-	for t_poly in terrain_polygons:
-		var t_global = t_poly
-		var result = Geometry2D.clip_polygons(t_global, destruction_global) # returns Array of polygons
+	for terrain_polygon in terrain_polygons:
+		var terrain_global = terrain_polygon
+		var result = Geometry2D.clip_polygons(terrain_global, destruction_global)
 		# append all resulting pieces
 		for piece in result:
 			new_terrain_polygons.append(piece)
@@ -30,14 +30,13 @@ func calculate_terrain_destruction(destruction_polygon: PackedVector2Array, expl
 	# Save the updated terrain (global polys)
 	terrain_polygons = new_terrain_polygons
 
-	# Rebuild collision shapes under StaticBody2D (clear old ones)
+	# Clear old collision shapes
 	for child in get_children():
 		if child is CollisionPolygon2D:
 			child.queue_free()
 
-	# Create new CollisionPolygon2D children from global polygons
+	# Create new local CollisionPolygon2D children from global polygons
 	for poly in terrain_polygons:
-		# convert to local coordinates of the StaticBody2D (so the CollisionPolygon2D polygon is correct)
 		var local_poly = to_local_polygon(self, poly)
 		var coll = CollisionPolygon2D.new()
 		coll.polygon = local_poly
@@ -76,14 +75,16 @@ func update_terrain_visual():
 
 # Helpers -------------------------------------------------------------------
 
+## Converts a polygon from local coordinates to global coordinates.
 func to_global_polygon(node: Node2D, poly: PackedVector2Array) -> PackedVector2Array:
 	var out := PackedVector2Array()
-	for p in poly:
-		out.append(node.to_global(p))
+	for point in poly:
+		out.append(node.to_global(point))
 	return out
 
+## Converts a polygon from global coordinates to the node's local coordinates.
 func to_local_polygon(node: Node2D, poly: PackedVector2Array) -> PackedVector2Array:
 	var out := PackedVector2Array()
-	for p in poly:
-		out.append(node.to_local(p))
+	for point in poly:
+		out.append(node.to_local(point))
 	return out
