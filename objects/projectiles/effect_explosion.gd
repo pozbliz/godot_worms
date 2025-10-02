@@ -20,5 +20,5 @@ func _setup_effect() -> void:
 
 	sprite.play("default")
 	EventBus.weapon_fired_hit.emit("explosion")
-	EventBus.explosion_triggered.emit(polygon)
+	EventBus.explosion_triggered.emit(polygon, self)
 	sprite.animation_finished.connect(Callable(self, "queue_free"))

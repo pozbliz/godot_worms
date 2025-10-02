@@ -1,57 +1,54 @@
 extends Node2D
 
-@onready var level: TextureRect = $Level
-@onready var terrain_collider: CollisionPolygon2D = $CollisionPolygon2D
-@onready var background: TextureRect = $Background
-
-var terrain_polygon : PackedVector2Array
-
+var terrain_polygons : Array = []
 
 func _ready() -> void:
 	EventBus.explosion_triggered.connect(calculate_terrain_destruction)
-	terrain_polygon = $CollisionPolygon2D.polygon
+	
+	terrain_polygons.clear()
+	var g = PackedVector2Array()
+	for p in $CollisionPolygon2D.polygon:
+		g.append($CollisionPolygon2D.to_global(p))
+	terrain_polygons.append(g)
+	
+func calculate_terrain_destruction(destruction_polygon: PackedVector2Array, explosion_node: Node2D) -> void:
+	var destruction_global = to_global_polygon(explosion_node, destruction_polygon)
+	var new_terrain_polygons : Array = []
 
-func calculate_terrain_destruction(destruction_polygon) -> void:
-	var result = Geometry2D.clip_polygons(terrain_polygon, destruction_polygon)
-	$CollisionPolygon2D.polygon = result[0]
+	# Clip each existing terrain piece against the destruction
+	for t_poly in terrain_polygons:
+		var t_global = t_poly
+		var result = Geometry2D.clip_polygons(t_global, destruction_global) # returns Array of polygons
+		# append all resulting pieces
+		for piece in result:
+			new_terrain_polygons.append(piece)
 
+	# Save the updated terrain (global polys)
+	terrain_polygons = new_terrain_polygons
 
-#func _ready():
-	#terrain_image = level.texture.get_image()
-	#terrain_texture = ImageTexture.create_from_image(terrain_image)
-	#level.texture = terrain_texture
-#
-	#update_collision()
-#
-#func update_collision():
-	#var bg_image: Image = background.texture.get_image()
-	#var width = terrain_image.get_width()
-	#var height = terrain_image.get_height()
-	#
-	#var mask = Image.create(width, height, false, Image.FORMAT_R8)
-	#
-	#for x in width:
-		#for y in height:
-			#var terrain_alpha = terrain_image.get_pixel(x, y).a
-			#var bg_alpha = bg_image.get_pixel(x, y).a
-			#
-			#if terrain_alpha > 0 and bg_alpha > 0:
-				#mask.set_pixel(x, y, Color(1, 1, 1))
-			#else:
-				#mask.set_pixel(x, y, Color(0, 0, 0))
-				#
-	#var polygon = mask_to_polygon(mask)
-	#collision.polygon = polygon
-	#
-#func mask_to_polygon(mask: Image) -> PackedVector2Array:
-	#var points = PackedVector2Array()
-	#var width = mask.get_width()
-	#var height = mask.get_height()
-	#
-	#for y in range(height):
-		#for x in range(width):
-			#if mask.get_pixel(x, y).r > 0:
-				#if x == 0 or mask.get_pixel(x - 1, y).r == 0 or \
-					#y == 0 or mask.get_pixel(x, y - 1).r == 0:
-					#points.append(Vector2(x, y))
-	#return points
+	# Rebuild collision shapes under StaticBody2D (clear old ones)
+	for child in get_children():
+		if child is CollisionPolygon2D:
+			child.queue_free()
+
+	# Create new CollisionPolygon2D children from global polygons
+	for poly in terrain_polygons:
+		# convert to local coordinates of the StaticBody2D (so the CollisionPolygon2D polygon is correct)
+		var local_poly = to_local_polygon(self, poly)
+		var coll = CollisionPolygon2D.new()
+		coll.polygon = local_poly
+		add_child(coll)
+
+# Helpers -------------------------------------------------------------------
+
+func to_global_polygon(node: Node2D, poly: PackedVector2Array) -> PackedVector2Array:
+	var out := PackedVector2Array()
+	for p in poly:
+		out.append(node.to_global(p))
+	return out
+
+func to_local_polygon(node: Node2D, poly: PackedVector2Array) -> PackedVector2Array:
+	var out := PackedVector2Array()
+	for p in poly:
+		out.append(node.to_local(p))
+	return out

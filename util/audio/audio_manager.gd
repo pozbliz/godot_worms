@@ -27,7 +27,6 @@ func _ready():
 		
 func _on_stream_finished(stream):
 	available.append(stream)
-	print(available)
 	
 ### --- SFX --- ###
 func play(
